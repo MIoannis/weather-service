@@ -3,11 +3,13 @@ import { Store, StoreConfig } from '@datorama/akita';
 
 export interface SessionState {
    town: string;
+   data: string;
 }
 
 export function createInitialState(): SessionState {
   return {
-    town: 'Moscow'
+    town: 'Moscow',
+    data: null
   };
 }
 
@@ -18,6 +20,4 @@ export class SessionStore extends Store<SessionState> {
   constructor() {
     super(createInitialState());
   }
-
 }
-
