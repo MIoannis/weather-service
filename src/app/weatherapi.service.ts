@@ -15,7 +15,7 @@ export class WeatherapiService {
       console.error('Error:', error.error.message);
     } else {
       console.error(
-        `Error status ${error.status}, ` + `body was: ${error.error}`
+        `Error status ${error.status}`
       );
     }
     return throwError(error);

@@ -7,11 +7,8 @@ export class SessionService {
   constructor(private sessionStore: SessionStore) {
   }
 
-  updateData(data: string) {
-    this.sessionStore.update({data});
+  updateData(weatherdata: any) {
+    this.sessionStore.update({weatherdata});
   }
 
-  updateTown(town: string) {
-    this.sessionStore.update({town});
-  }
 }

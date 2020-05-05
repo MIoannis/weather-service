@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
 
 export interface SessionState {
-   town: string;
-   data: string;
+   weatherdata: any;
 }
 
 export function createInitialState(): SessionState {
   return {
-    town: 'Moscow',
-    data: null
+    weatherdata: null,
   };
 }
 

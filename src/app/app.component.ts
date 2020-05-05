@@ -10,26 +10,21 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  town: string;
-  weatherdata: string;
+  weatherdata: any;
 
   constructor(private sessionService: SessionService,
               private sessionQuery: SessionQuery,
-              private weatherapiService: WeatherapiService) {
-  }
+              private weatherapiService: WeatherapiService) { }
 
   ngOnInit() {
-    this.sessionQuery.getTown$.subscribe(x => this.town = x);
     this.sessionQuery.getData$.subscribe(x => this.weatherdata = x);
   }
 
   changeTown(f: NgForm) {
-    this.town = f.value.town;
-    this.sessionService.updateTown(this.town);
     this.weatherapiService
-      .getApiData(`https://api.openweathermap.org/data/2.5/weather?q=${this.town}&appid=${this.weatherapiService.apikey}`)
-      .subscribe(data => this.weatherdata = JSON.stringify(data));
+      .getApiData(`https://api.openweathermap.org/data/2.5/weather?q=${f.value.town}&appid=${this.weatherapiService.apikey}`)
+      .subscribe(data => this.weatherdata = data);
     this.sessionService.updateData(this.weatherdata);
-    console.log(this.town, this.weatherdata);
+    document.getElementById('temp').textContent = String(Math.round(this.weatherdata.main.temp - 273));
   }
 }

@@ -4,8 +4,7 @@ import { SessionStore, SessionState } from './session.store';
 
 @Injectable({ providedIn: 'root' })
 export class SessionQuery extends Query<SessionState> {
-  getTown$ = this.select(store => store.town);
-  getData$ = this.select(store => store.data);
+  getData$ = this.select(store => store.weatherdata);
 
   constructor(protected store: SessionStore) {
     super(store);
