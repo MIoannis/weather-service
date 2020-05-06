@@ -1,5 +1,11 @@
-<form #f="ngForm" (ngSubmit)="changeTown(f)">
-  <input name="town" ngModel required #town="ngModel">
-  <button>Submit</button>
-  <div id="temp"></div>
-</form>
+<div class="main">
+  <form #f="ngForm" (ngSubmit)="chooseTown(f)">
+    <input name="town" ngModel required #town="ngModel">
+    <button>Submit</button>
+  </form>
+  <div class="main-temp">
+    <div class="degree-wrapper">{{(this.sessionQuery.getData$ | async).main.temp}}
+      <div class="temp" id="temp" *ngIf="weatherdata !== null">o</div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,29 @@
+.main {
+  height: 98vh;
+  width: 100%;
+}
+
 form {
+  height: 54vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-temp {
   position: absolute;
-  top: 45%;
-  left: 45%;
+  top: 12vh;
+  left: 17vw;
+  font-size: 1em;
+}
+
+.degree-wrapper {
+  font-size: 13vmin;
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.temp {
+  align-items: end;
+  font-size: 0.4em;
 }
