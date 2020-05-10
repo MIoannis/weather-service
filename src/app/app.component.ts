@@ -14,7 +14,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
         height: '90%',
       })),
       state('up', style({
-        height: '30%',
+        height: '40%',
       })),
       transition('center => up', [
         animate('1s ease-in-out')
@@ -34,14 +34,14 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     trigger('insertTrigger', [
       transition(':enter', [
         style({top: '125%'}),
-        animate('1s ease-out', style({ left: '35%', top: '45%' })),
+        animate('1s ease-in-out', style({ left: '30%', top: '50%' })),
       ]),
     ])
   ]
 })
 export class AppComponent {
   animVar = true;
-  kek = false;
+  secondAnimVar = false;
   weatherdata: any;
 
   constructor(private sessionService: SessionService,
@@ -51,6 +51,6 @@ export class AppComponent {
   chooseTown(f: NgForm) {
     this.sessionService.updateData(f.value.town);
     this.animVar = false;
-    this.kek = true;
+    this.secondAnimVar = true;
   }
 }

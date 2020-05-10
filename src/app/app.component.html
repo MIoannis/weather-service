@@ -12,7 +12,7 @@
       <div class="temp" id="temp" *ngIf="weatherdata !== null">o</div>
     </div>
   </div>
-   <div class="temp-info" @insertTrigger *ngIf="kek">
+   <div class="temp-info" @insertTrigger *ngIf="secondAnimVar">
      <div><span>Max temp: {{(this.sessionQuery.getData$ | async).main.temp_max}}</span></div>
      <div><span>Min temp: {{(this.sessionQuery.getData$ | async).main.temp_min}}</span></div>
      <div><span>Humidity: {{(this.sessionQuery.getData$ | async).main.humidity}}%</span></div>
