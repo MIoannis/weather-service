@@ -1,11 +1,21 @@
+<app-nav-bar></app-nav-bar>
 <div class="main">
-  <form #f="ngForm" (ngSubmit)="chooseTown(f)">
-    <input name="town" ngModel required #town="ngModel">
+  <form #f="ngForm" (ngSubmit)="chooseTown(f)" [@moveUp]="animVar ? 'center' : 'up'">
+    <label id="1"> Choose town:
+      <input name="town" ngModel required>
+    </label>
     <button>Submit</button>
   </form>
   <div class="main-temp">
-    <div class="degree-wrapper">{{(this.sessionQuery.getData$ | async).main.temp}}
+    <div class="degree-wrapper" [@changeOpacity]="animVar ? 'zero' : 'full'">
+      {{(this.sessionQuery.getData$ | async).main.temp}}
       <div class="temp" id="temp" *ngIf="weatherdata !== null">o</div>
     </div>
   </div>
+   <div class="temp-info" @insertTrigger *ngIf="kek">
+     <div><span>Max temp: {{(this.sessionQuery.getData$ | async).main.temp_max}}</span></div>
+     <div><span>Min temp: {{(this.sessionQuery.getData$ | async).main.temp_min}}</span></div>
+     <div><span>Humidity: {{(this.sessionQuery.getData$ | async).main.humidity}}%</span></div>
+     <div><span>Pressure: {{(this.sessionQuery.getData$ | async).main.pressure}}</span></div>
+    </div>
 </div>
