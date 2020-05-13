@@ -1,0 +1,80 @@
+.main {
+  height: 90vh;
+  width: 100%;
+  background-color: #4697e6;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+label {
+  font-size: 2.5vh;
+}
+
+input {
+  right: 15%;
+  border-radius: 10px;
+  width: 22vw;
+  padding: 2px;
+  border: 0;
+  height: 24px;
+  font-size: 1.05em;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 10px;
+  margin-left: 17px;
+  border: 0;
+  font-size: 2vh;
+}
+
+.main-temp {
+  position: absolute;
+  top: 12vh;
+  left: 17vw;
+}
+
+.degree-wrapper {
+  font-size: 11vmin;
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.temp {
+  align-items: end;
+  font-size: 0.4em;
+}
+
+.temp-info {
+  position: absolute;
+  left: 30%;
+  top: 50%;
+  border-radius: 7px;
+  border-color: black;
+  border-style: solid;
+  border-width: 3px;
+  flex-wrap: wrap;
+  cursor: default;
+  display: grid;
+  grid-template-columns: repeat(2, 20vw);
+  grid-template-rows: repeat(2, 5vh);
+  width: 40vw;
+  height: 10vh;
+  font-size: 2.7vmin;
+}
+
+.temp-info > div {
+  border-color: grey;
+  border-style: solid;
+  border-width: 1px;
+  background-color: rgba(255, 255, 255, 0.82);
+}
+
+span {
+  line-height: 5vh;
+  text-align: center;
+}

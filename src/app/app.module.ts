@@ -11,11 +11,15 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { SettingsComponent } from './settings/settings.component';
+import { MainpageComponent } from './mainpage/mainpage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
+    NavBarComponent,
+    SettingsComponent,
+    MainpageComponent
   ],
     imports: [
         BrowserModule,
