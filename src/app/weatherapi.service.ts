@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class WeatherapiService {
   }
 
   getApiData(url) {
-    return  this.http.get(url)
+    return this.http.get(url)
       .pipe(catchError(this.handleError));
   }
 }

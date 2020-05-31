@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {SessionService} from '../Akita/session.service';
-import {SessionQuery} from '../Akita/session.query';
-import {NgForm} from '@angular/forms';
+import { Component } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SessionService } from '../Akita/session.service';
+import { SessionQuery } from '../Akita/session.query';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-mainpage',
@@ -34,7 +34,7 @@ import {NgForm} from '@angular/forms';
     trigger('insertTrigger', [
       transition(':enter', [
         style({top: '125%'}),
-        animate('1s ease-in-out', style({ left: '30%', top: '50%' })),
+        animate('1s ease-in-out', style({ left: '25%', top: '50%' })),
       ]),
     ])
   ]

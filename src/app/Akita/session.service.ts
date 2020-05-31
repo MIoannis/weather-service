@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SessionStore } from './session.store';
-import {WeatherapiService} from '../weatherapi.service';
+import { WeatherapiService } from '../weatherapi.service';
 
 @Injectable({ providedIn: 'root' })
 export class SessionService {

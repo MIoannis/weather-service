@@ -1,5 +1,36 @@
 .set-main {
+  display: flex;
+  justify-content: center;
   height: 90vh;
   width: 100%;
   background-color: #dedede;
+}
+
+.set-set {
+  align-self: center;
+  width: 65vw;
+  height: 90%;
+  background-color: white;
+}
+
+p {
+  margin: 24px;
+  text-align: center;
+  font-size: 4em;
+}
+
+label {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.mat-radio-buttons {
+  display: flex;
+  justify-content: space-between;
+  right: 20%;
+}
+
+mat-radio-button {
+  padding-left: 5px;
+  padding-right: 5px;
 }

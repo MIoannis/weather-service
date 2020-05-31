@@ -1,3 +1,11 @@
 <div class="set-main">
-
+  <div class="set-set">
+    <p>Settings</p>
+    <div class="mat-radio-buttons">
+      <label>Degrees</label>
+      <mat-radio-group color="primary">
+        <mat-radio-button *ngFor="let system of systems" [value]="system">{{system}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
 </div>
