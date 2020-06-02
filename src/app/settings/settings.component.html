@@ -3,7 +3,10 @@
     <p>Settings</p>
     <div class="mat-radio-buttons">
       <label>Degrees</label>
-      <mat-radio-group color="primary">
+      <mat-radio-group color="primary"
+                       labelPosition="before"
+                       [value]="systems[1]"
+                       (change)="systemChange($event)">
         <mat-radio-button *ngFor="let system of systems"
                           [value]="system">{{system}}</mat-radio-button>
       </mat-radio-group>

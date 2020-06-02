@@ -6,13 +6,17 @@ import { WeatherapiService } from '../weatherapi.service';
 export class SessionService {
 
   constructor(private sessionStore: SessionStore,
-              private weatherapiService: WeatherapiService ) {
+              private weatherapiService: WeatherapiService) {
   }
 
-  updateData(f) {
-  return this.weatherapiService
-    .getApiData(`https://api.openweathermap.org/data/2.5/weather?q=${f}&units=metric&appid=${this.weatherapiService.apikey}`)
-    .subscribe(data => this.sessionStore.update({weatherdata: data}));
+  updateData(f, c) {
+    this.weatherapiService
+      .getApiData(`https://api.openweathermap.org/data/2.5/weather?q=${f}&units=${c}&appid=${this.weatherapiService.apikey}`)
+      .subscribe(data => this.sessionStore.update({weatherdata: data}));
+  }
+
+  updateSystem(system: string) {
+    this.sessionStore.update({system});
   }
 
 }

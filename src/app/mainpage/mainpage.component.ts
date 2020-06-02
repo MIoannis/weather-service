@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SessionService } from '../Akita/session.service';
 import { SessionQuery } from '../Akita/session.query';
@@ -39,7 +39,8 @@ import { NgForm } from '@angular/forms';
     ])
   ]
 })
-export class MainpageComponent {
+export class MainpageComponent implements OnInit {
+  currentsys: string;
   animVar = true;
   secondAnimVar = false;
   weatherdata: any;
@@ -48,8 +49,12 @@ export class MainpageComponent {
               public sessionQuery: SessionQuery) {
   }
 
+  ngOnInit() {
+    this.sessionQuery.currentSystem$.subscribe(x => this.currentsys = x);
+  }
+
   chooseTown(f: NgForm) {
-    this.sessionService.updateData(f.value.town);
+    this.sessionService.updateData(f.value.town, this.currentsys);
     this.animVar = false;
     this.secondAnimVar = true;
   }

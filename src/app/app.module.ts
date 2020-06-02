@@ -14,13 +14,15 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SettingsComponent } from './settings/settings.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { RoundPipe } from './round.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     SettingsComponent,
-    MainpageComponent
+    MainpageComponent,
+    RoundPipe
   ],
     imports: [
         BrowserModule,

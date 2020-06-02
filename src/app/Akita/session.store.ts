@@ -3,11 +3,13 @@ import { Store, StoreConfig } from '@datorama/akita';
 
 export interface SessionState {
    weatherdata: any;
+   system: string;
 }
 
 export function createInitialState(): SessionState {
   return {
     weatherdata: null,
+    system: 'metric'
   };
 }
 
