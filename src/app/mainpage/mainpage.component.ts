@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SessionService } from '../Akita/session.service';
 import { SessionQuery } from '../Akita/session.query';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-mainpage',
@@ -40,9 +41,11 @@ import { NgForm } from '@angular/forms';
   ]
 })
 export class MainpageComponent implements OnInit {
+  private fvar: Subscription;
+  private svar: Subscription;
   currentsys: string;
-  animVar = true;
-  secondAnimVar = false;
+  animVar: boolean;
+  secondAnimVar: boolean;
   weatherdata: any;
 
   constructor(private sessionService: SessionService,
@@ -51,11 +54,15 @@ export class MainpageComponent implements OnInit {
 
   ngOnInit() {
     this.sessionQuery.currentSystem$.subscribe(x => this.currentsys = x);
+    this.fvar = this.sessionQuery.getAnimVar$.subscribe(x => this.animVar = x);
+    this.svar = this.sessionQuery.getSecondAnimVar$.subscribe(x => this.secondAnimVar = x);
   }
 
   chooseTown(f: NgForm) {
     this.sessionService.updateData(f.value.town, this.currentsys);
-    this.animVar = false;
-    this.secondAnimVar = true;
+    this.sessionService.updateAnimVar(false, true);
+    this.fvar.unsubscribe();
+    this.svar.unsubscribe();
   }
+
 }

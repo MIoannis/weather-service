@@ -4,12 +4,18 @@ import { Store, StoreConfig } from '@datorama/akita';
 export interface SessionState {
    weatherdata: any;
    system: string;
+   index: number;
+   animvar: boolean;
+   secondanimvar: boolean;
 }
 
 export function createInitialState(): SessionState {
   return {
     weatherdata: null,
-    system: 'metric'
+    system: 'metric',
+    index: 1,
+    animvar: true,
+    secondanimvar: false,
   };
 }
 

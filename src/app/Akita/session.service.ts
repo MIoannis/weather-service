@@ -19,4 +19,11 @@ export class SessionService {
     this.sessionStore.update({system});
   }
 
+  updateIndex(index: number) {
+    this.sessionStore.update({index});
+  }
+
+  updateAnimVar(animvar: boolean, secondanimvar: boolean) {
+    this.sessionStore.update({animvar, secondanimvar});
+  }
 }
