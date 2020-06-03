@@ -43,6 +43,7 @@ import { Subscription } from 'rxjs';
 export class MainpageComponent implements OnInit {
   private fvar: Subscription;
   private svar: Subscription;
+  degreeletter: string;
   currentsys: string;
   animVar: boolean;
   secondAnimVar: boolean;
@@ -54,12 +55,14 @@ export class MainpageComponent implements OnInit {
 
   ngOnInit() {
     this.sessionQuery.currentSystem$.subscribe(x => this.currentsys = x);
-    this.fvar = this.sessionQuery.getAnimVar$.subscribe(x => this.animVar = x);
-    this.svar = this.sessionQuery.getSecondAnimVar$.subscribe(x => this.secondAnimVar = x);
+    this.sessionQuery.degreeLetter$.subscribe(x => this.degreeletter = x);
+    this.fvar = this.sessionQuery.animVar$.subscribe(x => this.animVar = x);
+    this.svar = this.sessionQuery.secondAnimVar$.subscribe(x => this.secondAnimVar = x);
   }
 
   chooseTown(f: NgForm) {
     this.sessionService.updateData(f.value.town, this.currentsys);
+    this.sessionService.updateValue(f.value.town);
     this.sessionService.updateAnimVar(false, true);
     this.fvar.unsubscribe();
     this.svar.unsubscribe();

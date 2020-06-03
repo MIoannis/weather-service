@@ -3,24 +3,23 @@
         (ngSubmit)="chooseTown(f)"
         [@moveUp]="animVar ? 'center' : 'up'">
     <label id="1"> Choose town:
-      <input name="town"
-             ngModel required>
+      <input name="town" ngModel>
     </label>
     <button>Submit</button>
   </form>
   <div class="main-temp">
     <div class="degree-wrapper"
          [@changeOpacity]="animVar ? 'zero' : 'full'">
-      {{(this.sessionQuery.getData$ | async).main.temp | round}}
+      {{(this.sessionQuery.weatherData$ | async).main.temp | round}} {{degreeletter}}
       <div class="temp" id="temp"
            *ngIf="weatherdata !== null">o</div>
     </div>
   </div>
   <div class="temp-info"
        @insertTrigger *ngIf="secondAnimVar">
-    <div><p>Max temp: {{(this.sessionQuery.getData$ | async).main.temp_max | round}}</p></div>
-    <div><p>Min temp: {{(this.sessionQuery.getData$ | async).main.temp_min | round}}</p></div>
-    <div><p>Humidity: {{(this.sessionQuery.getData$ | async).main.humidity | round}}%</p></div>
-    <div><p>Pressure: {{(this.sessionQuery.getData$ | async).main.pressure | round}}</p></div>
+    <div><p>Max temp: {{(this.sessionQuery.weatherData$ | async).main.temp_max | round}}</p></div>
+    <div><p>Min temp: {{(this.sessionQuery.weatherData$ | async).main.temp_min | round}}</p></div>
+    <div><p>Humidity: {{(this.sessionQuery.weatherData$ | async).main.humidity | round}}%</p></div>
+    <div><p>Pressure: {{(this.sessionQuery.weatherData$ | async).main.pressure | round}}</p></div>
   </div>
 </div>

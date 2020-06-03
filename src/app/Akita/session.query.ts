@@ -4,11 +4,13 @@ import { SessionStore, SessionState } from './session.store';
 
 @Injectable({ providedIn: 'root' })
 export class SessionQuery extends Query<SessionState> {
-  getData$ = this.select(store => store.weatherdata);
+  weatherData$ = this.select(store => store.weatherdata);
   currentSystem$ = this.select(store => store.system);
-  getIndex$ = this.select(store => store.index);
-  getAnimVar$ = this.select(store => store.animvar);
-  getSecondAnimVar$ = this.select(store => store.secondanimvar);
+  currentIndex$ = this.select(store => store.index);
+  animVar$ = this.select(store => store.animvar);
+  secondAnimVar$ = this.select(store => store.secondanimvar);
+  degreeLetter$ = this.select(store => store.degreeletter);
+  formValue$ = this.select(store => store.formvalue);
 
   constructor(protected store: SessionStore) {
     super(store);

@@ -9,7 +9,7 @@ export class SessionService {
               private weatherapiService: WeatherapiService) {
   }
 
-  updateData(f, c) {
+  updateData(f: string, c: string) {
     this.weatherapiService
       .getApiData(`https://api.openweathermap.org/data/2.5/weather?q=${f}&units=${c}&appid=${this.weatherapiService.apikey}`)
       .subscribe(data => this.sessionStore.update({weatherdata: data}));
@@ -26,4 +26,13 @@ export class SessionService {
   updateAnimVar(animvar: boolean, secondanimvar: boolean) {
     this.sessionStore.update({animvar, secondanimvar});
   }
+
+  updateDegreeLetter(degreeletter: string) {
+    this.sessionStore.update({degreeletter});
+  }
+
+  updateValue(formvalue: string) {
+    this.sessionStore.update({formvalue});
+  }
+
 }

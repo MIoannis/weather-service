@@ -7,6 +7,8 @@ export interface SessionState {
    index: number;
    animvar: boolean;
    secondanimvar: boolean;
+   degreeletter: string;
+   formvalue: string;
 }
 
 export function createInitialState(): SessionState {
@@ -16,6 +18,8 @@ export function createInitialState(): SessionState {
     index: 1,
     animvar: true,
     secondanimvar: false,
+    degreeletter: 'C',
+    formvalue: null,
   };
 }
 
