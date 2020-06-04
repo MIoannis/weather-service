@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SessionService } from '../Akita/session.service';
 import { SessionQuery } from '../Akita/session.query';
@@ -29,7 +29,7 @@ import { Subscription } from 'rxjs';
         opacity: 1
       })),
       transition('zero => full', [
-        animate('1.2s')
+        animate('1.5s')
       ]),
     ]),
     trigger('insertTrigger', [
@@ -41,23 +41,57 @@ import { Subscription } from 'rxjs';
   ]
 })
 export class MainpageComponent implements OnInit {
+  @ViewChild('canvas', { static: true })
+  canvas: ElementRef<HTMLCanvasElement>;
+
   private fvar: Subscription;
   private svar: Subscription;
+
+  ctx: CanvasRenderingContext2D;
+
   degreeletter: string;
   currentsys: string;
   animVar: boolean;
   secondAnimVar: boolean;
   weatherdata: any;
+  speed = 0;
 
   constructor(private sessionService: SessionService,
               public sessionQuery: SessionQuery) {
   }
 
   ngOnInit() {
-    this.sessionQuery.currentSystem$.subscribe(x => this.currentsys = x);
-    this.sessionQuery.degreeLetter$.subscribe(x => this.degreeletter = x);
+    this.ctx = this.canvas.nativeElement.getContext('2d');
     this.fvar = this.sessionQuery.animVar$.subscribe(x => this.animVar = x);
     this.svar = this.sessionQuery.secondAnimVar$.subscribe(x => this.secondAnimVar = x);
+    this.sessionQuery.currentSystem$.subscribe(x => this.currentsys = x);
+    this.sessionQuery.degreeLetter$.subscribe(x => this.degreeletter = x);
+  }
+
+  drawWind() {
+    requestAnimationFrame(this.drawWind.bind(this));
+    const canvas = this.canvas.nativeElement;
+    this.ctx.lineWidth = 2;
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.ctx.beginPath();
+
+    this.ctx.moveTo(0, canvas.height / 2 - 12);
+    for (let i = 0; i < canvas.width; i++) {
+      this.ctx.lineTo(i, canvas.height / 2 - 12 + Math.sin(i * 0.04 + this.speed) * 15);
+    }
+
+    this.ctx.moveTo(0, canvas.height / 2);
+    for (let i = 0; i < canvas.width; i++) {
+      this.ctx.lineTo(i, canvas.height / 2 + Math.sin(i * 0.04 + this.speed) * 15);
+    }
+
+    this.ctx.moveTo(0, canvas.height / 2 + 12);
+    for (let i = 0; i < canvas.width; i++) {
+      this.ctx.lineTo(i, canvas.height / 2 + 12 + Math.sin(i * 0.04 + this.speed) * 15);
+    }
+
+    this.ctx.stroke();
+    this.speed += 0.05;
   }
 
   chooseTown(f: NgForm) {

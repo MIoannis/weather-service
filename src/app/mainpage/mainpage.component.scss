@@ -25,6 +25,12 @@ input {
   font-size: 1.05em;
 }
 
+canvas {
+  position: absolute;
+  top: 35vh;
+  left: 8vw;
+}
+
 button {
   outline: 0;
   cursor: pointer;
@@ -32,6 +38,19 @@ button {
   margin-left: 17px;
   border: 0;
   font-size: 2vh;
+}
+
+p {
+  margin: 0;
+  line-height: 5vh;
+  text-align: center;
+}
+
+.wind {
+  top: 30vh;
+  left: 6vw;
+  font-size: 1.8vmax;
+  position: absolute;
 }
 
 .main-temp {
@@ -77,8 +96,3 @@ button {
   background-color: rgba(255, 255, 255, 0.82);
 }
 
-p {
-  margin: 0;
-  line-height: 5vh;
-  text-align: center;
-}
