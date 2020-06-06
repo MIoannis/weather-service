@@ -4,6 +4,8 @@ import { SessionService } from '../Akita/session.service';
 import { SessionQuery } from '../Akita/session.query';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import {filter} from 'rxjs/operators';
+import { Weather } from '../WeatherInt';
 
 @Component({
   selector: 'app-mainpage',
@@ -54,7 +56,10 @@ export class MainpageComponent implements OnInit {
   animVar: boolean;
   secondAnimVar: boolean;
   weatherdata: any;
-  speed = 0;
+  formvalue: string;
+
+  winddrawvalue = 0;
+  windvalue = 0;
 
   constructor(private sessionService: SessionService,
               public sessionQuery: SessionQuery) {
@@ -64,8 +69,11 @@ export class MainpageComponent implements OnInit {
     this.ctx = this.canvas.nativeElement.getContext('2d');
     this.fvar = this.sessionQuery.animVar$.subscribe(x => this.animVar = x);
     this.svar = this.sessionQuery.secondAnimVar$.subscribe(x => this.secondAnimVar = x);
+    this.sessionQuery.formValue$.subscribe(x => this.formvalue = x);
     this.sessionQuery.currentSystem$.subscribe(x => this.currentsys = x);
     this.sessionQuery.degreeLetter$.subscribe(x => this.degreeletter = x);
+    // @ts-ignore
+    this.sessionQuery.weatherData$.pipe(filter(x => x)).subscribe((x: Weather) => this.windvalue = x.wind.speed / 100);
   }
 
   drawWind() {
@@ -75,23 +83,23 @@ export class MainpageComponent implements OnInit {
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
     this.ctx.beginPath();
 
-    this.ctx.moveTo(0, canvas.height / 2 - 12);
+    this.ctx.moveTo(-10, canvas.height / 2 - 12);
     for (let i = 0; i < canvas.width; i++) {
-      this.ctx.lineTo(i, canvas.height / 2 - 12 + Math.sin(i * 0.04 + this.speed) * 15);
+      this.ctx.lineTo(i, canvas.height / 2 - 12 + Math.sin(i * 0.04 + this.winddrawvalue) * 15);
     }
 
-    this.ctx.moveTo(0, canvas.height / 2);
+    this.ctx.moveTo(-10, canvas.height / 2);
     for (let i = 0; i < canvas.width; i++) {
-      this.ctx.lineTo(i, canvas.height / 2 + Math.sin(i * 0.04 + this.speed) * 15);
+      this.ctx.lineTo(i, canvas.height / 2 + Math.sin(i * 0.04 + this.winddrawvalue) * 15);
     }
 
-    this.ctx.moveTo(0, canvas.height / 2 + 12);
+    this.ctx.moveTo(-10, canvas.height / 2 + 12);
     for (let i = 0; i < canvas.width; i++) {
-      this.ctx.lineTo(i, canvas.height / 2 + 12 + Math.sin(i * 0.04 + this.speed) * 15);
+      this.ctx.lineTo(i, canvas.height / 2 + 12 + Math.sin(i * 0.04 + this.winddrawvalue) * 15);
     }
 
     this.ctx.stroke();
-    this.speed += 0.05;
+    this.winddrawvalue += this.windvalue;
   }
 
   chooseTown(f: NgForm) {
@@ -101,5 +109,4 @@ export class MainpageComponent implements OnInit {
     this.fvar.unsubscribe();
     this.svar.unsubscribe();
   }
-
 }

@@ -1,20 +1,20 @@
 <div class="main">
   <form #f="ngForm"
-        (ngSubmit)="chooseTown(f)"
+        (ngSubmit)="chooseTown(f); drawWind()"
         [@moveUp]="animVar ? 'center' : 'up'">
-    <label id="1"> Choose town:
-      <input name="town" ngModel>
-    </label>
-    <button (click)="drawWind()">Submit</button>
+    <input placeholder="Search"
+           name="town"
+           [(ngModel)]="formvalue">
+    <button>Submit</button>
   </form>
   <div [@changeOpacity]="animVar ? 'zero' : 'full'">
     <canvas #canvas width="140" height="60"></canvas>
-    <div class="wind">Wind speed: {{(this.sessionQuery.weatherData$ | async).wind.speed}} m/s</div>
+    <div class="wind">Wind speed: {{(this.sessionQuery.weatherData$ | async)?.wind.speed}} m/s</div>
   </div>
   <div class="main-temp">
     <div class="degree-wrapper"
          [@changeOpacity]="animVar ? 'zero' : 'full'">
-      {{(this.sessionQuery.weatherData$ | async).main.temp | round}} {{degreeletter}}
+      {{(this.sessionQuery.weatherData$ | async)?.main.temp | round}} {{degreeletter}}
       <div class="temp" id="temp"
            *ngIf="weatherdata !== null">o
       </div>
@@ -22,9 +22,9 @@
   </div>
   <div class="temp-info"
        @insertTrigger *ngIf="secondAnimVar">
-    <div><p>Max temp: {{(this.sessionQuery.weatherData$ | async).main.temp_max | round}}</p></div>
-    <div><p>Min temp: {{(this.sessionQuery.weatherData$ | async).main.temp_min | round}}</p></div>
-    <div><p>Humidity: {{(this.sessionQuery.weatherData$ | async).main.humidity | round}}%</p></div>
-    <div><p>Pressure: {{(this.sessionQuery.weatherData$ | async).main.pressure | round}}</p></div>
+    <div><p class="p-temp-info">Max temp: {{(this.sessionQuery.weatherData$ | async)?.main.temp_max | round}}</p></div>
+    <div><p class="p-temp-info">Min temp: {{(this.sessionQuery.weatherData$ | async)?.main.temp_min | round}}</p></div>
+    <div><p class="p-temp-info">Humidity: {{(this.sessionQuery.weatherData$ | async)?.main.humidity | round}}%</p></div>
+    <div><p class="p-temp-info">Pressure: {{(this.sessionQuery.weatherData$ | async)?.main.pressure | round}}</p></div>
   </div>
 </div>

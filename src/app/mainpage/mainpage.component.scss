@@ -22,13 +22,13 @@ input {
   padding: 2px;
   border: 0;
   height: 24px;
-  font-size: 1.05em;
+  font-size: 1.4em;
 }
 
 canvas {
   position: absolute;
-  top: 35vh;
-  left: 8vw;
+  top: 40vh;
+  left: 7vw;
 }
 
 button {
@@ -40,15 +40,16 @@ button {
   font-size: 2vh;
 }
 
-p {
+.p-temp-info {
   margin: 0;
   line-height: 5vh;
   text-align: center;
 }
 
 .wind {
-  top: 30vh;
-  left: 6vw;
+  cursor: default;
+  top: 35vh;
+  left: 4vw;
   font-size: 1.8vmax;
   position: absolute;
 }

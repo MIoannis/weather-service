@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
+import { Weather } from '../WeatherInt';
 
 export interface SessionState {
-   weatherdata: any;
+   weatherdata: Weather;
    system: string;
    index: number;
    animvar: boolean;
