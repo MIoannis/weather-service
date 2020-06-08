@@ -5,24 +5,26 @@ import { Store, StoreConfig } from '@datorama/akita';
 import { Weather } from '../Weather';
 
 export interface SessionState {
-   weatherdata: Weather;
-   system: string;
-   index: number;
-   animvar: boolean;
-   secondanimvar: boolean;
-   degreeletter: string;
-   formvalue: string;
+  animvar: boolean;
+  secondanimvar: boolean;
+  index: number;
+  system: string;
+  degreeletter: string;
+  formvalue: string;
+  speedsystem: string;
+  weatherdata: Weather;
 }
 
 export function createInitialState(): SessionState {
   return {
-    weatherdata: null,
-    system: 'metric',
-    index: 1,
     animvar: true,
     secondanimvar: false,
+    index: 0,
+    system: 'metric',
     degreeletter: 'C',
     formvalue: null,
+    speedsystem: 'm/s',
+    weatherdata: null
   };
 }
 

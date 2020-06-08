@@ -10,7 +10,7 @@
   </form>
   <div [@changeOpacity]="animVar ? 'zero' : 'full'">
     <app-canvas [speeddata]="(this.sessionQuery.weatherData$ | async)?.wind.speed / 100"></app-canvas>
-    <div class="wind">Wind speed: {{(this.sessionQuery.weatherData$ | async)?.wind.speed | round}} m/s</div>
+    <div class="wind">Wind speed: {{(this.sessionQuery.weatherData$ | async)?.wind.speed}} {{speedsystem}}</div>
   </div>
   <div class="main-temp">
     <div class="degree-wrapper"

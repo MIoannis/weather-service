@@ -51,12 +51,13 @@ export class MainpageComponent implements OnInit {
   private fvar: Subscription;
   private svar: Subscription;
 
-  degreeletter: string;
-  currentsys: string;
-  formvalue: string;
-  cities: string[] = [];
   animVar: boolean;
   secondAnimVar: boolean;
+  degreeletter: string;
+  currentsystem: string;
+  formvalue: string;
+  speedsystem: string;
+  cities: string[] = [];
   weatherdata: Weather;
 
   constructor(private sessionService: SessionService,
@@ -77,16 +78,17 @@ export class MainpageComponent implements OnInit {
       ).subscribe();
 
     this.sessionQuery.formValue$.subscribe(x => this.formvalue = x);
-    this.sessionQuery.currentSystem$.subscribe(x => this.currentsys = x);
+    this.sessionQuery.currentSystem$.subscribe(x => this.currentsystem = x);
     this.sessionQuery.degreeLetter$.subscribe(x => this.degreeletter = x);
+    this.sessionQuery.speedSystem$.subscribe(x => this.speedsystem = x);
   }
 
-  chooseTown(f: NgForm) {
-    this.sessionService.updateData(f.value.town, this.currentsys);
-    this.sessionService.updateValue(f.value.town);
+  chooseTown(form: NgForm) {
+    this.sessionService.updateData(form.value.town, this.currentsystem);
+    this.sessionService.updateValue(form.value.town);
     this.sessionService.updateAnimVar(false, true);
     this.fvar.unsubscribe();
-    this.svar.unsubscribe();;
+    this.svar.unsubscribe();
   }
 
 }

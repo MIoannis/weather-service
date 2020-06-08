@@ -1,5 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
+import { SessionQuery } from '../Akita/session.query';
+
 @Component({
   selector: 'app-canvas',
   templateUrl: './canvas.component.html',
@@ -11,11 +13,12 @@ export class CanvasComponent implements OnInit {
 
   ctx: CanvasRenderingContext2D;
 
+  system: string;
   winddrawvalue = 0;
   windvalue = 0;
   callbacknumber = 0;
 
-  constructor() { }
+  constructor(private sessionQuery: SessionQuery) { }
 
   @Input() set speeddata(speed: number){
     this.windvalue = speed;
@@ -24,6 +27,7 @@ export class CanvasComponent implements OnInit {
 
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
+    this.sessionQuery.currentSystem$.subscribe(x => this.system = x);
   }
 
   drawWind() {
@@ -50,7 +54,9 @@ export class CanvasComponent implements OnInit {
     }
 
     this.ctx.stroke();
-    this.winddrawvalue += this.windvalue;
+    if (this.system === 'imperial') {
+      this.winddrawvalue += this.windvalue / 2.24;
+    } else {this.winddrawvalue += this.windvalue}
   }
 
 }
