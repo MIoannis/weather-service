@@ -7,7 +7,7 @@ import { SessionService } from '../Akita/session.service';
 import { SessionQuery } from '../Akita/session.query';
 
 import { Subscription } from 'rxjs';
-import { tap, take} from 'rxjs/operators';
+import { tap, take } from 'rxjs/operators';
 
 import { CityList } from '../CityList';
 import { Weather } from '../Weather';

@@ -10,7 +10,6 @@ import { SessionQuery } from '../Akita/session.query';
 export class CanvasComponent implements OnInit {
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
-
   ctx: CanvasRenderingContext2D;
 
   system: string;
@@ -32,7 +31,7 @@ export class CanvasComponent implements OnInit {
 
   drawWind() {
     cancelAnimationFrame(this.callbacknumber);
-    this.callbacknumber = requestAnimationFrame(this.drawWind.bind(this));
+    this.callbacknumber = requestAnimationFrame( this.drawWind.bind(this) );
     const canvas = this.canvas.nativeElement;
     this.ctx.lineWidth = 2;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -56,7 +55,9 @@ export class CanvasComponent implements OnInit {
     this.ctx.stroke();
     if (this.system === 'imperial') {
       this.winddrawvalue += this.windvalue / 2.24;
-    } else {this.winddrawvalue += this.windvalue}
+    } else {
+      this.winddrawvalue += this.windvalue;
+    }
   }
 
 }

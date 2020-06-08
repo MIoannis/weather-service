@@ -14,10 +14,10 @@ export class SessionService {
   updateData(formvalue: string, currentsystem: string) {
     this.weatherapiService
       .getData(`https://api.openweathermap.org/data/2.5/weather?q=${formvalue}&units=${currentsystem}&appid=${this.weatherapiService.apikey}`)
-      .subscribe(data => this.sessionStore.update({weatherdata: data}));
+      .subscribe(data => this.sessionStore.update( {weatherdata: data}) );
   }
 
-  updateSystem(system: string, degreeletter: string, speedsystem) {
+  updateSystem(system: string, degreeletter: string, speedsystem: string) {
     this.sessionStore.update({system, degreeletter, speedsystem});
   }
 
