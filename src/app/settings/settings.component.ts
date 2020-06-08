@@ -9,7 +9,7 @@ import { SessionQuery } from '../Akita/session.query';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  systems: string[] = ['Fahrenheit', 'Celsius', 'Kelvin'];
+  systems: string[] = ['Celsius', 'Fahrenheit', 'Kelvin'];
   formvalue: string;
   systemsindex: number;
 

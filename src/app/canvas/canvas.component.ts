@@ -13,10 +13,11 @@ export class CanvasComponent implements OnInit {
 
   winddrawvalue = 0;
   windvalue = 0;
+  callbacknumber = 0;
 
   constructor() { }
 
-  @Input() set dataflow(speed: number){
+  @Input() set speeddata(speed: number){
     this.windvalue = speed;
     this.drawWind();
   }
@@ -26,7 +27,8 @@ export class CanvasComponent implements OnInit {
   }
 
   drawWind() {
-    requestAnimationFrame(this.drawWind.bind(this));
+    cancelAnimationFrame(this.callbacknumber);
+    this.callbacknumber = requestAnimationFrame(this.drawWind.bind(this));
     const canvas = this.canvas.nativeElement;
     this.ctx.lineWidth = 2;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);

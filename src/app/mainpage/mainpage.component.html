@@ -9,7 +9,7 @@
     <button>Submit</button>
   </form>
   <div [@changeOpacity]="animVar ? 'zero' : 'full'">
-    <app-canvas [dataflow]="(this.sessionQuery.weatherData$ | async)?.wind.speed / 100"></app-canvas>
+    <app-canvas [speeddata]="(this.sessionQuery.weatherData$ | async)?.wind.speed / 100"></app-canvas>
     <div class="wind">Wind speed: {{(this.sessionQuery.weatherData$ | async)?.wind.speed | round}} m/s</div>
   </div>
   <div class="main-temp">

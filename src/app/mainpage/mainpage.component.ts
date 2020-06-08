@@ -86,7 +86,7 @@ export class MainpageComponent implements OnInit {
     this.sessionService.updateValue(f.value.town);
     this.sessionService.updateAnimVar(false, true);
     this.fvar.unsubscribe();
-    this.svar.unsubscribe();
+    this.svar.unsubscribe();;
   }
 
 }
