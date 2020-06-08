@@ -1,11 +1,16 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { WeatherService } from '../weather.service';
+
 import { SessionService } from '../Akita/session.service';
 import { SessionQuery } from '../Akita/session.query';
-import { NgForm } from '@angular/forms';
+
 import { Subscription } from 'rxjs';
-import {filter} from 'rxjs/operators';
-import { Weather } from '../WeatherInt';
+import { tap, take} from 'rxjs/operators';
+
+import { CityList } from '../CityList';
+import { Weather } from '../Weather';
 
 @Component({
   selector: 'app-mainpage',
@@ -43,63 +48,37 @@ import { Weather } from '../WeatherInt';
   ]
 })
 export class MainpageComponent implements OnInit {
-  @ViewChild('canvas', { static: true })
-  canvas: ElementRef<HTMLCanvasElement>;
-
   private fvar: Subscription;
   private svar: Subscription;
 
-  ctx: CanvasRenderingContext2D;
-
   degreeletter: string;
   currentsys: string;
+  formvalue: string;
+  cities: string[] = [];
   animVar: boolean;
   secondAnimVar: boolean;
-  weatherdata: any;
-  formvalue: string;
-
-  winddrawvalue = 0;
-  windvalue = 0;
+  weatherdata: Weather;
 
   constructor(private sessionService: SessionService,
+              private weatherService: WeatherService,
               public sessionQuery: SessionQuery) {
   }
 
   ngOnInit() {
-    this.ctx = this.canvas.nativeElement.getContext('2d');
     this.fvar = this.sessionQuery.animVar$.subscribe(x => this.animVar = x);
     this.svar = this.sessionQuery.secondAnimVar$.subscribe(x => this.secondAnimVar = x);
+
+    this.weatherService.getTowns()
+      .pipe(
+        take(1),
+        tap((towns: CityList[]) => {towns.forEach((town: CityList) => {this.cities.push(town.name);
+        });
+        })
+      ).subscribe();
+
     this.sessionQuery.formValue$.subscribe(x => this.formvalue = x);
     this.sessionQuery.currentSystem$.subscribe(x => this.currentsys = x);
     this.sessionQuery.degreeLetter$.subscribe(x => this.degreeletter = x);
-    // @ts-ignore
-    this.sessionQuery.weatherData$.pipe(filter(x => x)).subscribe((x: Weather) => this.windvalue = x.wind.speed / 100);
-  }
-
-  drawWind() {
-    requestAnimationFrame(this.drawWind.bind(this));
-    const canvas = this.canvas.nativeElement;
-    this.ctx.lineWidth = 2;
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.ctx.beginPath();
-
-    this.ctx.moveTo(-10, canvas.height / 2 - 12);
-    for (let i = 0; i < canvas.width; i++) {
-      this.ctx.lineTo(i, canvas.height / 2 - 12 + Math.sin(i * 0.04 + this.winddrawvalue) * 15);
-    }
-
-    this.ctx.moveTo(-10, canvas.height / 2);
-    for (let i = 0; i < canvas.width; i++) {
-      this.ctx.lineTo(i, canvas.height / 2 + Math.sin(i * 0.04 + this.winddrawvalue) * 15);
-    }
-
-    this.ctx.moveTo(-10, canvas.height / 2 + 12);
-    for (let i = 0; i < canvas.width; i++) {
-      this.ctx.lineTo(i, canvas.height / 2 + 12 + Math.sin(i * 0.04 + this.winddrawvalue) * 15);
-    }
-
-    this.ctx.stroke();
-    this.winddrawvalue += this.windvalue;
   }
 
   chooseTown(f: NgForm) {
@@ -109,4 +88,5 @@ export class MainpageComponent implements OnInit {
     this.fvar.unsubscribe();
     this.svar.unsubscribe();
   }
+
 }

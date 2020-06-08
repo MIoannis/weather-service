@@ -15,6 +15,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { RoundPipe } from './round.pipe';
+import { CanvasComponent } from './canvas/canvas.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { RoundPipe } from './round.pipe';
     NavBarComponent,
     SettingsComponent,
     MainpageComponent,
-    RoundPipe
+    RoundPipe,
+    CanvasComponent,
   ],
     imports: [
         BrowserModule,
@@ -32,7 +34,7 @@ import { RoundPipe } from './round.pipe';
         environment.production ? [] : AkitaNgDevtools,
         AkitaNgRouterStoreModule,
         FormsModule,
-        MatRadioModule
+        MatRadioModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
