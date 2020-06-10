@@ -13,24 +13,25 @@ export class SessionService {
 
   updateData(formvalue: string, currentsystem: string) {
     this.weatherapiService
-      .getData(`https://api.openweathermap.org/data/2.5/weather?q=${formvalue}&units=${currentsystem}&appid=${this.weatherapiService.apikey}`)
-      .subscribe(data => this.sessionStore.update( {weatherdata: data}) );
+      .getData(
+        `https://api.openweathermap.org/data/2.5/weather?q=${formvalue}&units=${currentsystem}&appid=${this.weatherapiService.apikey}`
+      ).subscribe(data => this.sessionStore.update({weatherData: data}) );
   }
 
-  updateSystem(system: string, degreeletter: string, speedsystem: string) {
-    this.sessionStore.update({system, degreeletter, speedsystem});
+  updateSystem(system: string, degreeLetter: string, speedSystem: string) {
+    this.sessionStore.update({system, degreeLetter, speedSystem});
   }
 
   updateIndex(index: number) {
     this.sessionStore.update({index});
   }
 
-  updateAnimVar(animvar: boolean, secondanimvar: boolean) {
-    this.sessionStore.update({animvar, secondanimvar});
+  updateAnimVar(animVar: boolean, secondAnimVar: boolean) {
+    this.sessionStore.update({animVar, secondAnimVar});
   }
 
-  updateValue(formvalue: string) {
-    this.sessionStore.update({formvalue});
+  updateValue(searchValue: string) {
+    this.sessionStore.update({searchValue});
   }
 
 }

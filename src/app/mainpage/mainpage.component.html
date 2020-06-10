@@ -3,21 +3,22 @@
         (ngSubmit)="chooseTown(f)"
         [@moveUp]="animVar ? 'center' : 'up'">
     <input placeholder="Search"
-           name="town"
+           name="search"
            type="text"
-           [(ngModel)]="formvalue">
+           (keypress)="test(f)"
+           [(ngModel)]="formValue">
     <button>Submit</button>
   </form>
   <div [@changeOpacity]="animVar ? 'zero' : 'full'">
-    <app-canvas [speeddata]="(this.sessionQuery.weatherData$ | async)?.wind.speed / 100"></app-canvas>
-    <div class="wind">Wind speed: {{(this.sessionQuery.weatherData$ | async)?.wind.speed}} {{speedsystem}}</div>
+    <app-canvas [speedData]="(this.sessionQuery.weatherData$ | async)?.wind.speed / 100"></app-canvas>
+    <div class="wind">Wind speed: {{(this.sessionQuery.weatherData$ | async)?.wind.speed}} {{speedSystem}}</div>
   </div>
   <div class="main-temp">
     <div class="degree-wrapper"
          [@changeOpacity]="animVar ? 'zero' : 'full'">
-      {{(this.sessionQuery.weatherData$ | async)?.main.temp | round}} {{degreeletter}}
+      {{(this.sessionQuery.weatherData$ | async)?.main.temp | round}} {{degreeLetter}}
       <div class="temp" id="temp"
-           *ngIf="weatherdata !== null">o
+           *ngIf="weatherData !== null">o
       </div>
     </div>
   </div>

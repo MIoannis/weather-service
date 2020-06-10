@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import {FormControl, NgForm} from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { WeatherService } from '../weather.service';
 
 import { SessionService } from '../Akita/session.service';
 import { SessionQuery } from '../Akita/session.query';
 
-import { Subscription } from 'rxjs';
-import { tap, take } from 'rxjs/operators';
+import {Observable, Subscription} from 'rxjs';
+import {tap, take, startWith} from 'rxjs/operators';
 
 import { CityList } from '../CityList';
 import { Weather } from '../Weather';
@@ -53,12 +53,12 @@ export class MainpageComponent implements OnInit {
 
   animVar: boolean;
   secondAnimVar: boolean;
-  degreeletter: string;
-  currentsystem: string;
-  formvalue: string;
-  speedsystem: string;
+  degreeLetter: string;
+  currentSystem: string;
+  formValue: string;
+  speedSystem: string;
   cities: string[] = [];
-  weatherdata: Weather;
+  weatherData: Weather;
 
   constructor(private sessionService: SessionService,
               private weatherService: WeatherService,
@@ -72,23 +72,29 @@ export class MainpageComponent implements OnInit {
     this.weatherService.getTowns()
       .pipe(
         take(1),
-        tap((towns: CityList[]) => {towns.forEach((town: CityList) => {this.cities.push(town.name);
+        tap((cities: CityList[]) => {cities.forEach((town: CityList) => {
+          this.cities.push(town.name);
         });
         })
       ).subscribe();
 
-    this.sessionQuery.formValue$.subscribe(x => this.formvalue = x);
-    this.sessionQuery.currentSystem$.subscribe(x => this.currentsystem = x);
-    this.sessionQuery.degreeLetter$.subscribe(x => this.degreeletter = x);
-    this.sessionQuery.speedSystem$.subscribe(x => this.speedsystem = x);
+    this.sessionQuery.searchValue$.subscribe(x => this.formValue = x);
+    this.sessionQuery.currentSystem$.subscribe(x => this.currentSystem = x);
+    this.sessionQuery.degreeLetter$.subscribe(x => this.degreeLetter = x);
+    this.sessionQuery.speedSystem$.subscribe(x => this.speedSystem = x);
   }
 
   chooseTown(form: NgForm) {
-    this.sessionService.updateData(form.value.town, this.currentsystem);
-    this.sessionService.updateValue(form.value.town);
+    this.sessionService.updateData(form.value.search, this.currentSystem);
+    this.sessionService.updateValue(form.value.search);
     this.sessionService.updateAnimVar(false, true);
     this.fvar.unsubscribe();
     this.svar.unsubscribe();
+  }
+
+  test(form: NgForm) {
+    const sortedCities = this.cities.sort();
+    form.valueChanges.pipe(take(1)).subscribe(x => console.log(x.search));
   }
 
 }

@@ -10,7 +10,7 @@ import { SessionQuery } from '../Akita/session.query';
 })
 export class SettingsComponent implements OnInit {
   systems: string[] = ['Celsius', 'Fahrenheit', 'Kelvin'];
-  formvalue: string;
+  formValue: string;
   index: number;
 
   constructor(private sessionService: SessionService,
@@ -19,23 +19,23 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.sessionQuery.index$.subscribe(x => this.index = x);
-    this.sessionQuery.formValue$.subscribe(x => this.formvalue = x);
+    this.sessionQuery.searchValue$.subscribe(x => this.formValue = x);
   }
 
   systemChange(event, i) {
     if (event.value === 'Celsius') {
       this.sessionService.updateSystem('metric', 'C', 'm/s');
-      this.sessionService.updateData(this.formvalue, 'metric');
+      this.sessionService.updateData(this.formValue, 'metric');
     }
 
     if (event.value === 'Fahrenheit') {
       this.sessionService.updateSystem('imperial', 'F', 'm/h');
-      this.sessionService.updateData(this.formvalue, 'imperial');
+      this.sessionService.updateData(this.formValue, 'imperial');
     }
 
     if (event.value === 'Kelvin') {
       this.sessionService.updateSystem('', 'K', 'm/s');
-      this.sessionService.updateData(this.formvalue, '');
+      this.sessionService.updateData(this.formValue, '');
     }
     this.sessionService.updateIndex(i);
   }
