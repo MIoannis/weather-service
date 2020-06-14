@@ -11,10 +11,10 @@ export class SessionService {
               private weatherapiService: WeatherService) {
   }
 
-  updateData(formvalue: string, currentsystem: string) {
+  updateData(formValue: string, currentSystem: string) {
     this.weatherapiService
       .getData(
-        `https://api.openweathermap.org/data/2.5/weather?q=${formvalue}&units=${currentsystem}&appid=${this.weatherapiService.apikey}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${formValue}&units=${currentSystem}&appid=${this.weatherapiService.apikey}`
       ).subscribe(data => this.sessionStore.update({weatherData: data}) );
   }
 

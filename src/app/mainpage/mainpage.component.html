@@ -1,11 +1,11 @@
 <div class="main">
-  <form #f="ngForm"
-        (ngSubmit)="chooseTown(f)"
+  <form #form="ngForm"
+        (ngSubmit)="chooseTown(form)"
         [@moveUp]="animVar ? 'center' : 'up'">
     <input placeholder="Search"
            name="search"
            type="text"
-           (keypress)="test(f)"
+           (keydown)="search(form)"
            [(ngModel)]="formValue">
     <button>Submit</button>
   </form>
@@ -16,17 +16,28 @@
   <div class="main-temp">
     <div class="degree-wrapper"
          [@changeOpacity]="animVar ? 'zero' : 'full'">
-      {{(this.sessionQuery.weatherData$ | async)?.main.temp | round}} {{degreeLetter}}
-      <div class="temp" id="temp"
-           *ngIf="weatherData !== null">o
-      </div>
+      {{(this.sessionQuery.weatherData$ | async)?.main.temp | round}} &deg;{{degreeLetter}}
     </div>
   </div>
   <div class="temp-info"
        @insertTrigger *ngIf="secondAnimVar">
-    <div><p class="p-temp-info">Feels like: {{(this.sessionQuery.weatherData$ | async)?.main.feels_like | round}}</p></div>
-    <div><p class="p-temp-info">Cloudiness: {{(this.sessionQuery.weatherData$ | async)?.clouds.all}}%</p></div>
-    <div><p class="p-temp-info">Humidity: {{(this.sessionQuery.weatherData$ | async)?.main.humidity | round}}%</p></div>
-    <div><p class="p-temp-info">Pressure: {{(this.sessionQuery.weatherData$ | async)?.main.pressure | round}}</p></div>
+    <div>
+      <p class="p-temp-info">
+        Feels like: {{(this.sessionQuery.weatherData$ | async)?.main.feels_like | round}} &deg;{{degreeLetter}}</p>
+    </div>
+    <div>
+      <p class="p-temp-info">Cloudiness: {{(this.sessionQuery.weatherData$ | async)?.clouds.all}}%</p>
+    </div>
+    <div>
+      <p class="p-temp-info">Humidity: {{(this.sessionQuery.weatherData$ | async)?.main.humidity | round}}%</p>
+    </div>
+    <div>
+      <p class="p-temp-info">Pressure: {{(this.sessionQuery.weatherData$ | async)?.main.pressure | round}} hPa</p>
+    </div>
+  </div>
+  <div class="thanks">
+    <p class="data-phrase">
+      All data is brought to you by <a href="https://openweathermap.org/">openweathermap.org</a>
+    </p>
   </div>
 </div>

@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { WeatherService } from '../weather.service';
 
 import { SessionService } from '../Akita/session.service';
 import { SessionQuery } from '../Akita/session.query';
 
-import {Observable, Subscription} from 'rxjs';
-import {tap, take, startWith} from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { tap, take, map } from 'rxjs/operators';
 
 import { CityList } from '../CityList';
-import { Weather } from '../Weather';
 
 @Component({
   selector: 'app-mainpage',
@@ -57,8 +56,8 @@ export class MainpageComponent implements OnInit {
   currentSystem: string;
   formValue: string;
   speedSystem: string;
-  cities: string[] = [];
-  weatherData: Weather;
+  cities = new Map<string, string[]>();
+  filtredCities: string[] = [];
 
   constructor(private sessionService: SessionService,
               private weatherService: WeatherService,
@@ -72,11 +71,14 @@ export class MainpageComponent implements OnInit {
     this.weatherService.getTowns()
       .pipe(
         take(1),
-        tap((cities: CityList[]) => {cities.forEach((town: CityList) => {
-          this.cities.push(town.name);
+        tap((cities: CityList[]) => {cities.forEach((city: CityList) => {
+          this.cities.set(city.name[0], [city.name].concat( this.cities.get(city.name[0]) ));
         });
         })
-      ).subscribe();
+      ).pipe(
+        map((cities: CityList[]) => {
+        cities.length = 0;
+      })).subscribe();
 
     this.sessionQuery.searchValue$.subscribe(x => this.formValue = x);
     this.sessionQuery.currentSystem$.subscribe(x => this.currentSystem = x);
@@ -92,9 +94,9 @@ export class MainpageComponent implements OnInit {
     this.svar.unsubscribe();
   }
 
-  test(form: NgForm) {
-    const sortedCities = this.cities.sort();
-    form.valueChanges.pipe(take(1)).subscribe(x => console.log(x.search));
+  search(form: NgForm) {
+    form.valueChanges.pipe(take(1)).subscribe(val => this.filtredCities = this.cities.get(val.search));
+    console.log(this.filtredCities);
   }
 
 }

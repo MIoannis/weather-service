@@ -25,10 +25,8 @@ input {
   font-size: 1.4em;
 }
 
-canvas {
-  position: absolute;
-  top: 40vh;
-  left: 7vw;
+a {
+  color: #8CBBEA;
 }
 
 button {
@@ -49,7 +47,7 @@ button {
 .wind {
   cursor: default;
   top: 33vh;
-  left: 5vw;
+  left: 7vw;
   font-size: 2.5vmin;
   position: absolute;
 }
@@ -58,18 +56,8 @@ button {
   position: absolute;
   top: 19vh;
   left: 5vw;
-}
-
-.degree-wrapper {
   cursor: default;
   font-size: 11vmin;
-  display: inline-flex;
-  align-items: flex-start;
-}
-
-.temp {
-  align-items: end;
-  font-size: 0.4em;
 }
 
 .temp-info {
@@ -97,3 +85,17 @@ button {
   background-color: rgba(255, 255, 255, 0.82);
 }
 
+.thanks {
+  background: #1F4266;
+  width: 100%;
+  position: absolute;
+  top: 96%;
+  height: 4%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.data-phrase {
+  color: white;
+}
