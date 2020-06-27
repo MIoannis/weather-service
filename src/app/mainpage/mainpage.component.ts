@@ -86,17 +86,20 @@ export class MainpageComponent implements OnInit {
     this.sessionQuery.speedSystem$.subscribe(x => this.speedSystem = x);
   }
 
-  chooseTown(form: NgForm) {
-    this.sessionService.updateData(form.value.search, this.currentSystem);
-    this.sessionService.updateValue(form.value.search);
-    this.sessionService.updateAnimVar(false, true);
+  submitCity(form: NgForm) {
+    this._update(form.value.search, this.currentSystem);
     this.fvar.unsubscribe();
     this.svar.unsubscribe();
   }
 
+  _update(searchValue: string, currentSystem: string) {
+    this.sessionService.updateData(searchValue, currentSystem);
+    this.sessionService.updateValue(searchValue);
+    this.sessionService.updateAnimVar(false, true);
+  }
+
   search(form: NgForm) {
-    form.valueChanges.pipe(take(1)).subscribe(val => this.filtredCities = this.cities.get(val.search));
-    console.log(this.filtredCities);
+    form.valueChanges.pipe(take(1)).subscribe(letter => this.filtredCities = this.cities.get(letter));
   }
 
 }

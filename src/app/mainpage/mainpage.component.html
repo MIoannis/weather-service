@@ -1,6 +1,6 @@
 <div class="main">
   <form #form="ngForm"
-        (ngSubmit)="chooseTown(form)"
+        (ngSubmit)="submitCity(form)"
         [@moveUp]="animVar ? 'center' : 'up'">
     <input placeholder="Search"
            name="search"
