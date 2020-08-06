@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatRadioModule } from '@angular/material/radio';
 
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
@@ -35,8 +36,9 @@ import { RoundPipe } from './round.pipe';
     environment.production ? [] : AkitaNgDevtools,
     AkitaNgRouterStoreModule,
     FormsModule,
-    MatRadioModule,
     MatAutocompleteModule,
+    FontAwesomeModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

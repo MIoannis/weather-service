@@ -1,20 +1,20 @@
 .main {
   width: 100%;
-  height: 10%;
+  height: 6%;
   background: #1F4266;
 }
 
 .wrapper {
   position: absolute;
   left: 5%;
-  width: 80%;
+  width: 92%;
   height: inherit;
   display: flex;
   align-items: center;
 }
 
 nav {
-  width: 50%;
+  width: 100%;
   height: inherit;
   display: inline-flex;
   justify-content: space-between;
@@ -23,9 +23,18 @@ nav {
 
 p {
   outline: 0;
-  min-width: 80px;
-  max-width: 115px;
   cursor: pointer;
   color: white;
-  font-size: 4.5vmin;
+  font-size: 4vmin;
+}
+
+fa-icon {
+  padding: 7px;
+  border-radius: 14px;
+  border: 2px solid #1F4266;
+  transition: border-color 370ms linear;
+}
+
+fa-icon:hover {
+  border-color: white;
 }

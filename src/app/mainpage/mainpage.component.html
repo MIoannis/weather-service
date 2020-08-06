@@ -7,7 +7,10 @@
            type="text"
            (keydown)="search(form)"
            [(ngModel)]="formValue">
-    <button>Submit</button>
+    <button>
+      <fa-icon [icon]="faSearch">
+      </fa-icon>
+    </button>
   </form>
   <div [@changeOpacity]="animVar ? 'zero' : 'full'">
     <app-canvas [speedData]="(this.sessionQuery.weatherData$ | async)?.wind.speed / 100"></app-canvas>
@@ -22,21 +25,21 @@
   <div class="temp-info"
        @insertTrigger *ngIf="secondAnimVar">
     <div>
-      <p class="p-temp-info">
+      <p>
         Feels like: {{(this.sessionQuery.weatherData$ | async)?.main.feels_like | round}} &deg;{{degreeLetter}}</p>
     </div>
     <div>
-      <p class="p-temp-info">Cloudiness: {{(this.sessionQuery.weatherData$ | async)?.clouds.all}}%</p>
+      <p>Cloudiness: {{(this.sessionQuery.weatherData$ | async)?.clouds.all}}%</p>
     </div>
     <div>
-      <p class="p-temp-info">Humidity: {{(this.sessionQuery.weatherData$ | async)?.main.humidity | round}}%</p>
+      <p>Humidity: {{(this.sessionQuery.weatherData$ | async)?.main.humidity | round}}%</p>
     </div>
     <div>
-      <p class="p-temp-info">Pressure: {{(this.sessionQuery.weatherData$ | async)?.main.pressure | round}} hPa</p>
+      <p>Pressure: {{(this.sessionQuery.weatherData$ | async)?.main.pressure | round}} hPa</p>
     </div>
   </div>
   <div class="thanks">
-    <p class="data-phrase">
+    <p>
       All data is brought to you by <a href="https://openweathermap.org/">openweathermap.org</a>
     </p>
   </div>

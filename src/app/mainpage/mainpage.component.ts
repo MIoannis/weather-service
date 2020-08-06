@@ -9,6 +9,8 @@ import { SessionQuery } from '../Akita/session.query';
 import { Subscription } from 'rxjs';
 import { tap, take, map } from 'rxjs/operators';
 
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
 import { CityList } from '../CityList';
 
 @Component({
@@ -21,7 +23,7 @@ import { CityList } from '../CityList';
         height: '90%',
       })),
       state('up', style({
-        height: '40%',
+        height: '60%',
       })),
       transition('center => up', [
         animate('1s ease-in-out')
@@ -41,7 +43,7 @@ import { CityList } from '../CityList';
     trigger('insertTrigger', [
       transition(':enter', [
         style({top: '125%'}),
-        animate('1s ease-in-out', style({ left: '25%', top: '50%' })),
+        animate('1s ease-in-out', style({ left: '20%', top: '67%' })),
       ]),
     ])
   ]
@@ -49,6 +51,8 @@ import { CityList } from '../CityList';
 export class MainpageComponent implements OnInit {
   private fvar: Subscription;
   private svar: Subscription;
+
+  faSearch = faSearch;
 
   animVar: boolean;
   secondAnimVar: boolean;
@@ -99,7 +103,7 @@ export class MainpageComponent implements OnInit {
   }
 
   search(form: NgForm) {
-    form.valueChanges.pipe(take(1)).subscribe(letter => this.filtredCities = this.cities.get(letter));
+    form.valueChanges.pipe(take(1)).subscribe(letter => console.log(letter));
   }
 
 }
