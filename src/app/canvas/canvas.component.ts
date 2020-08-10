@@ -59,5 +59,4 @@ export class CanvasComponent implements OnInit {
       this.windDrawValue += this.windValue;
     }
   }
-
 }

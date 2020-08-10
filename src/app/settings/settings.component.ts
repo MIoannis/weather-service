@@ -39,5 +39,4 @@ export class SettingsComponent implements OnInit {
     }
     this.sessionService.updateIndex(i);
   }
-
 }

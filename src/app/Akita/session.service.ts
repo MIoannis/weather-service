@@ -33,5 +33,4 @@ export class SessionService {
   updateValue(searchValue: string) {
     this.sessionStore.update({searchValue});
   }
-
 }

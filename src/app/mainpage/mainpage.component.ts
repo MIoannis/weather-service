@@ -12,7 +12,6 @@ import { tap, take, map } from 'rxjs/operators';
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import { CityList } from '../CityList';
-import {element} from "protractor";
 
 @Component({
   selector: 'app-mainpage',
@@ -57,11 +56,15 @@ export class MainpageComponent implements OnInit {
 
   animVar: boolean;
   secondAnimVar: boolean;
+
   degreeLetter: string;
   currentSystem: string;
   formValue: string;
   speedSystem: string;
+
   cities = new Map<string, string[]>();
+  mySet = new Set<string>();
+
   filtredCities: string[] = [];
   showedCities: string[] = [];
 
@@ -109,12 +112,14 @@ export class MainpageComponent implements OnInit {
     form.valueChanges.pipe(
       take(1), tap(value => {
         if(value.search.length === 1) {
-          this.filtredCities = this.cities.get(value.search);
-          this.filtredCities.pop();
+          this.filtredCities = this.cities.get(value.search).filter(y => y !== undefined);
+          while (this.filtredCities.length !== 0) {
+            this.mySet.add( this.filtredCities.pop() );
+          }
         }
       })
     ).pipe(
-      tap(value => {this.filtredCities.forEach(element => {
+      tap(value => {this.mySet.forEach(element => {
         if(element.indexOf(value.search) !== -1 && value.search.length > 2) {
           this.showedCities.push(element);
         }
@@ -122,5 +127,4 @@ export class MainpageComponent implements OnInit {
       })
     ).subscribe();
   }
-
 }

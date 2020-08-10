@@ -16,5 +16,4 @@ export class SessionQuery extends Query<SessionState> {
   constructor(protected store: SessionStore) {
     super(store);
   }
-
 }
