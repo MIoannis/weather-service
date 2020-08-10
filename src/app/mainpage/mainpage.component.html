@@ -5,11 +5,16 @@
     <input placeholder="Search"
            name="search"
            type="text"
-           (keydown)="search(form)"
-           [(ngModel)]="formValue">
+           (keypress)="search(form)"
+           [(ngModel)]="formValue"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let city of showedCities" [value]="city">
+        {{city}}
+      </mat-option>
+    </mat-autocomplete>
     <button>
-      <fa-icon [icon]="faSearch">
-      </fa-icon>
+      <fa-icon [icon]="faSearch"></fa-icon>
     </button>
   </form>
   <div [@changeOpacity]="animVar ? 'zero' : 'full'">
@@ -19,14 +24,14 @@
   <div class="main-temp">
     <div class="degree-wrapper"
          [@changeOpacity]="animVar ? 'zero' : 'full'">
-      {{(this.sessionQuery.weatherData$ | async)?.main.temp | round}} &deg;{{degreeLetter}}
+      {{(this.sessionQuery.weatherData$ | async)?.main.temp | round}}&deg;{{degreeLetter}}
     </div>
   </div>
   <div class="temp-info"
        @insertTrigger *ngIf="secondAnimVar">
     <div>
       <p>
-        Feels like: {{(this.sessionQuery.weatherData$ | async)?.main.feels_like | round}} &deg;{{degreeLetter}}</p>
+        Feels like: {{(this.sessionQuery.weatherData$ | async)?.main.feels_like | round}}&deg;{{degreeLetter}}</p>
     </div>
     <div>
       <p>Cloudiness: {{(this.sessionQuery.weatherData$ | async)?.clouds.all}}%</p>

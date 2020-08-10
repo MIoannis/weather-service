@@ -5,8 +5,8 @@ import { MainpageComponent } from './mainpage/mainpage.component';
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/main' },
-  { path: 'main', component: MainpageComponent },
+  { path: '', pathMatch: 'full', redirectTo: '/weather' },
+  { path: 'weather', component: MainpageComponent },
   { path: 'settings', component: SettingsComponent},
 ];
 

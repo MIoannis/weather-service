@@ -12,6 +12,7 @@ import { tap, take, map } from 'rxjs/operators';
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import { CityList } from '../CityList';
+import {element} from "protractor";
 
 @Component({
   selector: 'app-mainpage',
@@ -62,6 +63,7 @@ export class MainpageComponent implements OnInit {
   speedSystem: string;
   cities = new Map<string, string[]>();
   filtredCities: string[] = [];
+  showedCities: string[] = [];
 
   constructor(private sessionService: SessionService,
               private weatherService: WeatherService,
@@ -103,7 +105,22 @@ export class MainpageComponent implements OnInit {
   }
 
   search(form: NgForm) {
-    form.valueChanges.pipe(take(1)).subscribe(letter => console.log(letter));
+    this.showedCities.length = 0;
+    form.valueChanges.pipe(
+      take(1), tap(value => {
+        if(value.search.length === 1) {
+          this.filtredCities = this.cities.get(value.search);
+          this.filtredCities.pop();
+        }
+      })
+    ).pipe(
+      tap(value => {this.filtredCities.forEach(element => {
+        if(element.indexOf(value.search) !== -1 && value.search.length > 2) {
+          this.showedCities.push(element);
+        }
+      });
+      })
+    ).subscribe();
   }
 
 }
