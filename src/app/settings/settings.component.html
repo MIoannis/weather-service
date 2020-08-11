@@ -1,15 +1,13 @@
-<div class="set-main">
-  <div class="set-set">
-    <h1>Settings</h1>
-    <div class="mat-radio-buttons-container">
-      <label>Degrees</label>
-      <mat-radio-group color="primary"
-                       labelPosition="before"
-                       [value]="systems[index]">
-        <mat-radio-button *ngFor="let system of systems; let i = index"
-                          (change)="systemChange($event, i)"
-                          [value]="system">{{system}}</mat-radio-button>
-      </mat-radio-group>
-    </div>
+<div class="settings">
+  <h1>Settings</h1>
+  <div class="mat-radio-buttons-container">
+    <label>Degrees</label>
+    <mat-radio-group color="warn"
+                     labelPosition="before"
+                     [value]="systems[index]">
+      <mat-radio-button *ngFor="let system of systems; let i = index"
+                        (change)="systemChange($event, i)"
+                        [value]="system">{{system}}</mat-radio-button>
+    </mat-radio-group>
   </div>
 </div>

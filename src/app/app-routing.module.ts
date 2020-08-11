@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SettingsComponent } from './settings/settings.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/weather' },
   { path: 'weather', component: MainpageComponent },
-  { path: 'settings', component: SettingsComponent},
 ];
 
 @NgModule({

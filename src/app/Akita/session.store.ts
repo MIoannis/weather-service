@@ -7,11 +7,12 @@ import { Weather } from '../Weather';
 export interface SessionState {
   animVar: boolean;
   secondAnimVar: boolean;
+  setVar: boolean;
   index: number;
-  system: string;
   degreeLetter: string;
   searchValue: string;
   speedSystem: string;
+  system: string;
   weatherData: Weather;
 }
 
@@ -19,11 +20,12 @@ export function createInitialState(): SessionState {
   return {
     animVar: true,
     secondAnimVar: false,
+    setVar: true,
     index: 0,
-    system: 'metric',
     degreeLetter: 'C',
     searchValue: null,
     speedSystem: 'm/s',
+    system: 'metric',
     weatherData: null
   };
 }

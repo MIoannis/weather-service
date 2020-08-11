@@ -45,7 +45,18 @@ import { CityList } from '../CityList';
         style({top: '125%'}),
         animate('1s ease-in-out', style({ left: '20%', top: '67%' })),
       ]),
-    ])
+    ]),
+    trigger( 'sideSettings', [
+      state('hidden', style({
+        right: '-30%',
+      })),
+      state('shown', style({
+        right: '0',
+      })),
+      transition('hidden => shown', [
+        animate('1s ease-in-out')
+      ]),
+    ]),
   ]
 })
 export class MainpageComponent implements OnInit {
@@ -56,6 +67,7 @@ export class MainpageComponent implements OnInit {
 
   animVar: boolean;
   secondAnimVar: boolean;
+  setVar: boolean;
 
   degreeLetter: string;
   currentSystem: string;
@@ -65,7 +77,7 @@ export class MainpageComponent implements OnInit {
   cities = new Map<string, string[]>();
   mySet = new Set<string>();
 
-  filtredCities: string[] = [];
+  filteredCities: string[] = [];
   showedCities: string[] = [];
 
   constructor(private sessionService: SessionService,
@@ -90,6 +102,7 @@ export class MainpageComponent implements OnInit {
       })).subscribe();
 
     this.sessionQuery.searchValue$.subscribe(x => this.formValue = x);
+    this.sessionQuery.setVar$.subscribe(x => this.setVar = x);
     this.sessionQuery.currentSystem$.subscribe(x => this.currentSystem = x);
     this.sessionQuery.degreeLetter$.subscribe(x => this.degreeLetter = x);
     this.sessionQuery.speedSystem$.subscribe(x => this.speedSystem = x);
@@ -112,9 +125,9 @@ export class MainpageComponent implements OnInit {
     form.valueChanges.pipe(
       take(1), tap(value => {
         if(value.search.length === 1) {
-          this.filtredCities = this.cities.get(value.search).filter(y => y !== undefined);
-          while (this.filtredCities.length !== 0) {
-            this.mySet.add( this.filtredCities.pop() );
+          this.filteredCities = this.cities.get(value.search).filter(y => y !== undefined);
+          while (this.filteredCities.length !== 0) {
+            this.mySet.add( this.filteredCities.pop() );
           }
         }
       })

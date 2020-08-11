@@ -8,6 +8,7 @@ export class SessionQuery extends Query<SessionState> {
   currentSystem$ = this.select(store => store.system);
   index$ = this.select(store => store.index);
   animVar$ = this.select(store => store.animVar);
+  setVar$ = this.select(store => store.setVar);
   secondAnimVar$ = this.select(store => store.secondAnimVar);
   degreeLetter$ = this.select(store => store.degreeLetter);
   searchValue$ = this.select(store => store.searchValue);

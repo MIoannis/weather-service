@@ -1,4 +1,5 @@
 <div class="main">
+  <app-settings [@sideSettings]="setVar ? 'hidden' : 'shown'"></app-settings>
   <form #form="ngForm"
         (ngSubmit)="submitCity(form)"
         [@moveUp]="animVar ? 'center' : 'up'">

@@ -30,6 +30,10 @@ export class SessionService {
     this.sessionStore.update({animVar, secondAnimVar});
   }
 
+  updateSetVar(setVar: boolean) {
+    this.sessionStore.update({setVar});
+  }
+
   updateValue(searchValue: string) {
     this.sessionStore.update({searchValue});
   }

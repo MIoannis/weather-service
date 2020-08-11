@@ -2,8 +2,8 @@
   <div class="wrapper">
     <nav>
       <p routerLink="/weather">Weather</p>
-      <fa-icon routerLink="/settings"
-               size="2x"
+      <fa-icon size="2x"
+               (click)="set()"
                [ngStyle]="{'color': white, 'cursor': pointer}"
                [icon]="faCogs"></fa-icon>
     </nav>
