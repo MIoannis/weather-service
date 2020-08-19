@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SessionService } from '../Akita/session.service';
-import { SessionQuery } from '../Akita/session.query';
+import { SessionService } from '../Store/session.service';
+import { SessionQuery } from '../Store/session.query';
 
 @Component({
   selector: 'app-settings',

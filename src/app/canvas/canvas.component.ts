@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
-import { SessionQuery } from '../Akita/session.query';
+import { SessionQuery } from '../Store/session.query';
 
 @Component({
   selector: 'app-canvas',

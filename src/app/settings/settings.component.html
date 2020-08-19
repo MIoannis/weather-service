@@ -3,7 +3,6 @@
   <div class="mat-radio-buttons-container">
     <label>Degrees</label>
     <mat-radio-group color="warn"
-                     labelPosition="before"
                      [value]="systems[index]">
       <mat-radio-button *ngFor="let system of systems; let i = index"
                         (change)="systemChange($event, i)"

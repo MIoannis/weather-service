@@ -1,5 +1,5 @@
 <div class="main">
-  <app-settings [@sideSettings]="setVar ? 'hidden' : 'shown'"></app-settings>
+  <app-settings @sideSettings *ngIf="setVar"></app-settings>
   <form #form="ngForm"
         (ngSubmit)="submitCity(form)"
         [@moveUp]="animVar ? 'center' : 'up'">
@@ -28,8 +28,7 @@
       {{(this.sessionQuery.weatherData$ | async)?.main.temp | round}}&deg;{{degreeLetter}}
     </div>
   </div>
-  <div class="temp-info"
-       @insertTrigger *ngIf="secondAnimVar">
+  <div class="temp-info" @insertTrigger *ngIf="secondAnimVar">
     <div>
       <p>
         Feels like: {{(this.sessionQuery.weatherData$ | async)?.main.feels_like | round}}&deg;{{degreeLetter}}</p>
@@ -45,7 +44,7 @@
     </div>
   </div>
   <div class="thanks">
-    <p>
+    <p class="data">
       All data is brought to you by <a href="https://openweathermap.org/">openweathermap.org</a>
     </p>
   </div>

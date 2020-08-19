@@ -6,7 +6,7 @@
 
 app-settings {
   position: absolute;
-  right: 25%;
+  right: 0;
 }
 
 form {
@@ -69,6 +69,10 @@ button:hover {
 
 p {
   color: white;
+}
+
+.data {
+  font-size: 1vmax;
 }
 
 .wind {

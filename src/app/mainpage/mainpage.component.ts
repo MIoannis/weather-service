@@ -3,8 +3,8 @@ import { NgForm } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { WeatherService } from '../weather.service';
 
-import { SessionService } from '../Akita/session.service';
-import { SessionQuery } from '../Akita/session.query';
+import { SessionService } from '../Store/session.service';
+import { SessionQuery } from '../Store/session.query';
 
 import { Subscription } from 'rxjs';
 import { tap, take, map } from 'rxjs/operators';
@@ -47,14 +47,13 @@ import { CityList } from '../CityList';
       ]),
     ]),
     trigger( 'sideSettings', [
-      state('hidden', style({
-        right: '-30%',
-      })),
-      state('shown', style({
-        right: '0',
-      })),
-      transition('hidden => shown', [
-        animate('1s ease-in-out')
+      transition(':enter', [
+        style({right: '-30%'}),
+        animate('1s ease-in-out', style({ right: '0%' })),
+      ]),
+      transition(':leave', [
+        style({right: '0%'}),
+        animate('1s ease-in-out', style({ right: '-30%' })),
       ]),
     ]),
   ]
@@ -133,7 +132,7 @@ export class MainpageComponent implements OnInit {
       })
     ).pipe(
       tap(value => {this.mySet.forEach(element => {
-        if(element.indexOf(value.search) !== -1 && value.search.length > 2) {
+        if(element.indexOf(value.search) !== -1 && value.search.length > 1) {
           this.showedCities.push(element);
         }
       });

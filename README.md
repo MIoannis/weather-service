@@ -35,3 +35,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Использование e2e тестов
 
 Пропишите `ng e2e` для проведения e2e тестов при помощи [Protractor](http://www.protractortest.org/).
+
+## Images
+
+![Image](src/assets/image_1.png)
+![Image](src/assets/image_2.png)
+![Image](src/assets/image_3.png)
+![Image](src/assets/image_4.png)

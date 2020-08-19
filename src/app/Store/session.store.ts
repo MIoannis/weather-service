@@ -20,7 +20,7 @@ export function createInitialState(): SessionState {
   return {
     animVar: true,
     secondAnimVar: false,
-    setVar: true,
+    setVar: false,
     index: 0,
     degreeLetter: 'C',
     searchValue: null,
