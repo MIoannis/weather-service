@@ -9,7 +9,7 @@ import { SessionQuery } from '../Store/session.query';
 import { Subscription } from 'rxjs';
 import { tap, take, map } from 'rxjs/operators';
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import { CityList } from '../CityList';
 

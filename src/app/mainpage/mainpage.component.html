@@ -3,12 +3,14 @@
   <form #form="ngForm"
         (ngSubmit)="submitCity(form)"
         [@moveUp]="animVar ? 'center' : 'up'">
-    <input placeholder="Search"
-           name="search"
-           type="text"
-           (keypress)="search(form)"
-           [(ngModel)]="formValue"
-           [matAutocomplete]="auto">
+    <label>
+      <input placeholder="Search"
+             name="search"
+             type="text"
+             (keypress)="search(form)"
+             [(ngModel)]="formValue"
+             [matAutocomplete]="auto">
+    </label>
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let city of showedCities" [value]="city">
         {{city}}
