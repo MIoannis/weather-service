@@ -53,7 +53,7 @@ import { CityList } from '../CityList';
       ]),
       transition(':leave', [
         style({right: '0%'}),
-        animate('1s ease-in-out', style({ right: '-30%' })),
+        animate('1s ease-in-out', style({ right: '-20%' })),
       ]),
     ]),
   ]
