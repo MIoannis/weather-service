@@ -1,0 +1,45 @@
+@import "../additional/variables";
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    outline: 0;
+    cursor: pointer;
+    background: rgba(140, 187, 234, 0.6);
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+    border: 0;
+    padding: 0;
+    width: 40px;
+    height: 4.4vh;
+    transition: background 350ms linear;
+  }
+
+  button:hover {
+    background: rgba(140, 187, 234, 1);
+  }
+
+  label {
+    font-size: 1.6vmax;
+  }
+
+  input {
+    background: rgba(255, 255, 255, 0.7);
+    outline: 0;
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    width: 26vw;
+    border: 0;
+    padding: 0;
+    height: 4.4vh;
+    font-size: 1em;
+    transition: background 300ms linear;
+
+    &:hover, &:focus {
+      background: $input-background;
+    }
+  }
+}

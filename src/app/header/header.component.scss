@@ -1,0 +1,43 @@
+@import "../additional/variables";
+
+.main {
+  width: 100%;
+  height: 6%;
+  background: $header-background-color;
+
+  div {
+    position: absolute;
+    left: 5%;
+    width: 92%;
+    height: inherit;
+    display: flex;
+    align-items: center;
+
+    nav {
+      width: 100%;
+      height: inherit;
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    p {
+      outline: 0;
+      cursor: pointer;
+      color: white;
+      font-size: 4vmin;
+    }
+
+    fa-icon {
+      padding: 7px;
+      border-radius: 14px;
+      border: 2px solid rgb(0, 0, 0, 0);
+      transition: border 370ms linear;
+      outline: 0;
+    }
+
+    fa-icon:hover {
+      border-color: white;
+    }
+  }
+}

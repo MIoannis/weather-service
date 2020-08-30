@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SessionService } from '../Store/session.service';
-import { SessionQuery } from '../Store/session.query';
+import { SessionService } from '../store/session.service';
+import { SessionQuery } from '../store/session.query';
+
+import {Weather} from "../additional/weather.int";
 
 @Component({
   selector: 'app-settings',
@@ -10,32 +12,31 @@ import { SessionQuery } from '../Store/session.query';
 })
 export class SettingsComponent implements OnInit {
   systems: string[] = ['Celsius', 'Fahrenheit', 'Kelvin'];
-  formValue: string;
+  data: Weather;
   index: number;
 
   constructor(private sessionService: SessionService,
-              private sessionQuery: SessionQuery) {
-  }
+              private sessionQuery: SessionQuery) { }
 
   ngOnInit() {
     this.sessionQuery.index$.subscribe(x => this.index = x);
-    this.sessionQuery.searchValue$.subscribe(x => this.formValue = x);
+    this.sessionQuery.weatherData$.subscribe(x => this.data = x)
   }
 
   systemChange(event, i) {
     if (event.value === 'Celsius') {
       this.sessionService.updateSystem('metric', 'C', 'm/s');
-      this.sessionService.updateData(this.formValue, 'metric');
+      this.sessionService.updateCurrentData(this.data.name, 'metric');
     }
 
     if (event.value === 'Fahrenheit') {
       this.sessionService.updateSystem('imperial', 'F', 'm/h');
-      this.sessionService.updateData(this.formValue, 'imperial');
+      this.sessionService.updateCurrentData(this.data.name, 'imperial');
     }
 
     if (event.value === 'Kelvin') {
       this.sessionService.updateSystem('', 'K', 'm/s');
-      this.sessionService.updateData(this.formValue, '');
+      this.sessionService.updateCurrentData(this.data.name, '');
     }
     this.sessionService.updateIndex(i);
   }

@@ -1,12 +1,14 @@
 <div class="settings">
   <h1>Settings</h1>
-  <div class="mat-radio-buttons-container">
+  <div class="radio-buttons-container">
     <label>Degrees</label>
-    <mat-radio-group color="warn"
-                     [value]="systems[index]">
+    <mat-radio-group color="warn" [value]="systems[index]">
       <mat-radio-button *ngFor="let system of systems; let i = index"
                         (change)="systemChange($event, i)"
                         [value]="system">{{system}}</mat-radio-button>
     </mat-radio-group>
+  </div>
+  <div>
+    <p>Languages<br>Coming soon!</p>
   </div>
 </div>

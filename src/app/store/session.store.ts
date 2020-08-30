@@ -2,31 +2,31 @@ import { Injectable } from '@angular/core';
 
 import { Store, StoreConfig } from '@datorama/akita';
 
-import { Weather } from '../Weather';
+import { Weather } from '../additional/weather.int';
 
 export interface SessionState {
-  animVar: boolean;
-  secondAnimVar: boolean;
+  tempAnimation: boolean;
+  tempDataAnimation: boolean;
   setVar: boolean;
   index: number;
   degreeLetter: string;
-  searchValue: string;
   speedSystem: string;
   system: string;
   weatherData: Weather;
+  forecastData: any;
 }
 
 export function createInitialState(): SessionState {
   return {
-    animVar: true,
-    secondAnimVar: false,
+    tempAnimation: true,
+    tempDataAnimation: false,
     setVar: false,
     index: 0,
     degreeLetter: 'C',
-    searchValue: null,
     speedSystem: 'm/s',
     system: 'metric',
-    weatherData: null
+    weatherData: null,
+    forecastData: null
   };
 }
 

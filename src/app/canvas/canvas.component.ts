@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
-import { SessionQuery } from '../Store/session.query';
+import { SessionQuery } from '../store/session.query';
 
 @Component({
   selector: 'app-canvas',
@@ -31,28 +31,33 @@ export class CanvasComponent implements OnInit {
 
   private drawWind() {
     cancelAnimationFrame(this.callbackNumber);
-    this.callbackNumber = requestAnimationFrame( this.drawWind.bind(this) );
+    this.callbackNumber = requestAnimationFrame( this.drawWind.bind(this) ); //animation loop
     const canvas = this.canvas.nativeElement;
-    this.ctx.lineWidth = 2;
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.ctx.beginPath();
+    const height = canvas.height;
+    const width = canvas.width;
+    const context = this.ctx;
+    context.lineWidth = 1;
+    context.clearRect(0, 0, width, height);
+    context.beginPath();
 
-    this.ctx.moveTo(-10, canvas.height / 2 - 12);
-    for (let i = 0; i < canvas.width; i++) {
-      this.ctx.lineTo(i, canvas.height / 2 - 12 + Math.sin(i * 0.04 + this.windDrawValue) * 17);
+    context.moveTo(-10, height / 2);
+    for (let i = 0; i < width; i++) {
+      context.lineTo(
+        i, height / 2 - 6 + Math.sin(
+          i * 0.10 /*<= wave length*/ + this.windDrawValue * 1.15) * 5 /*<= amplitude*/);
     }
 
-    this.ctx.moveTo(-10, canvas.height / 2);
-    for (let i = 0; i < canvas.width; i++) {
-      this.ctx.lineTo(i, canvas.height / 2 + Math.sin(i * 0.04 + this.windDrawValue) * 17);
+    context.moveTo(-10, height / 2);
+    for (let i = 0; i < width; i++) {
+      context.lineTo(i, height / 2 + Math.sin(i * 0.10 + this.windDrawValue * 1.15) * 5);
     }
 
-    this.ctx.moveTo(-10, canvas.height / 2 + 12);
-    for (let i = 0; i < canvas.width; i++) {
-      this.ctx.lineTo(i, canvas.height / 2 + 12 + Math.sin(i * 0.04 + this.windDrawValue) * 17);
+    context.moveTo(-10, height / 2);
+    for (let i = 0; i < width; i++) {
+      context.lineTo(i, height / 2 + 6 + Math.sin(i * 0.10 + this.windDrawValue * 1.15) * 5);
     }
 
-    this.ctx.stroke();
+    context.stroke();
     if (this.system === 'imperial') {
       this.windDrawValue += this.windValue / 2.24;
     } else {

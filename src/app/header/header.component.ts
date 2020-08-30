@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { faCogs } from "@fortawesome/free-solid-svg-icons";
 
-import { SessionService } from "../Store/session.service";
-import { SessionQuery } from "../Store/session.query";
+import { SessionService } from "../store/session.service";
+import { SessionQuery } from "../store/session.query";
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class NavBarComponent implements OnInit {
+export class HeaderComponent implements OnInit {
   setVar: boolean;
 
   faCogs = faCogs;

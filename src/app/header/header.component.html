@@ -1,11 +1,12 @@
 <div class="main">
-  <div class="wrapper">
+  <div>
     <nav>
       <p routerLink="/weather">Weather</p>
       <fa-icon size="2x"
                (click)="set()"
                [ngStyle]="{'color': white, 'cursor': pointer}"
-               [icon]="faCogs"></fa-icon>
+               [icon]="faCogs">
+      </fa-icon>
     </nav>
   </div>
 </div>
