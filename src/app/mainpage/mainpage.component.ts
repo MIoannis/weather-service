@@ -16,23 +16,23 @@ import { SessionQuery } from '../store/session.query';
         opacity: 1
       })),
       transition('zero => full', [
-        animate('1.5s')
+        animate('0.8s')
       ]),
     ]),
     trigger('insertTempData', [
       transition(':enter', [
         style({top: '125%'}),
-        animate('1s ease-in-out', style({ left: '20%', top: '67%' })),
+        animate('1s ease', style({ left: '20%', top: '67%' })),
       ]),
     ]),
     trigger( 'insertSideSettings', [
       transition(':enter', [
-        style({right: '-30%'}),
-        animate('1s ease-in-out', style({ right: '0%' })),
+        style({right: '-25%'}),
+        animate('.8s ease', style({ right: '0%' })),
       ]),
       transition(':leave', [
         style({right: '0%'}),
-        animate('1s ease-in-out', style({ right: '-20%' })),
+        animate('1s ease', style({ right: '-20%' })),
       ]),
     ]),
   ]
@@ -42,6 +42,11 @@ export class MainpageComponent implements OnInit {
   tempDataAnimation: boolean;
   setVar: boolean;
   checkData = false;
+  time = false;
+
+  translateXValue = 0;
+  positiveButton = true;
+  negativeButton = false;
 
   degreeLetter: string;
   speedSystem: string;
@@ -60,6 +65,32 @@ export class MainpageComponent implements OnInit {
   }
 
   showError(value) {
-    this.checkData = value;
+    setTimeout(() => this.checkData = value, 5000);
+  }
+
+  changeTranslateValuePositive() {
+    this.translateXValue += 32;
+    if (this.translateXValue === 0) {
+      this.positiveButton = true;
+      this.negativeButton = false;
+    }
+
+    if (this.translateXValue < 0) {
+      this.positiveButton = true;
+      this.negativeButton = true;
+    }
+  }
+
+  changeTranslateValueNegative() {
+    this.translateXValue -= 32;
+    if (this.translateXValue === -384) {
+      this.positiveButton = false;
+      this.negativeButton = true;
+    }
+
+    if (this.translateXValue > -384) {
+      this.positiveButton = true;
+      this.negativeButton = true;
+    }
   }
 }

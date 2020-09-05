@@ -19,7 +19,7 @@ import { HeaderComponent } from './header/header.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { SearchComponent } from './search/search.component';
 import { SettingsComponent } from './settings/settings.component';
-import { RoundPipe } from './additional/round.pipe';
+import { DatePipe } from './additional/date.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { RoundPipe } from './additional/round.pipe';
     MainpageComponent,
     SearchComponent,
     SettingsComponent,
-    RoundPipe
+    DatePipe
   ],
     imports: [
         BrowserModule,

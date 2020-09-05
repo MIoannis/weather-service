@@ -13,16 +13,16 @@ export class SessionService {
 
   updateCurrentData(inputValue: string, currentSystem: string) {
     this.weatherService
-      .getData(
+      .getCurrentData(
         `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&units=${currentSystem}&appid=${this.weatherService.APIkey}`
       ).subscribe(data => this.sessionStore.update({weatherData: data}) );
   }
 
   updateDailyData(inputValue: string, currentSystem: string) {
     this.weatherService
-      .getData(
-        `api.openweathermap.org/data/2.5/forecast?q=${inputValue}&units=${currentSystem}&appid=${this.weatherService.APIkey}`
-      ).subscribe(data => this.sessionStore.update({weatherData: data}));
+      .getForecast(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${inputValue}&units=${currentSystem}&appid=${this.weatherService.APIkey}`
+      ).subscribe(data => this.sessionStore.update({forecastData: data}));
   }
 
   updateSystem(system: string, degreeLetter: string, speedSystem: string) {
@@ -39,5 +39,9 @@ export class SessionService {
 
   updateSetVar(setVar: boolean) {
     this.sessionStore.update({setVar});
+  }
+
+  updateTime(forecastTime: number) {
+    this.sessionStore.update({forecastTime})
   }
 }

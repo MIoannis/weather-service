@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Store, StoreConfig } from '@datorama/akita';
 
-import { Weather } from '../additional/weather.int';
+import { Weather } from '../additional/interfaces/weather.int';
+import { Forecast } from "../additional/interfaces/forecast.int";
 
 export interface SessionState {
   tempAnimation: boolean;
@@ -13,7 +14,8 @@ export interface SessionState {
   speedSystem: string;
   system: string;
   weatherData: Weather;
-  forecastData: any;
+  forecastData: Forecast;
+  forecastTime: number;
 }
 
 export function createInitialState(): SessionState {
@@ -26,7 +28,8 @@ export function createInitialState(): SessionState {
     speedSystem: 'm/s',
     system: 'metric',
     weatherData: null,
-    forecastData: null
+    forecastData: null,
+    forecastTime: null
   };
 }
 

@@ -1,15 +1,13 @@
 <form #form="ngForm"
       (ngSubmit)="submitCity(form); showError(true)"
       [@moveInputUp]="(this.sessionQuery.weatherData$ | async) ? 'up' : 'center'">
-  <label>
-    <input placeholder="Search"
-           name="search"
-           type="text"
-           size="15"
-           (keypress)="search(form)"
-           [(ngModel)]="inputValue"
-           [matAutocomplete]="auto">
-  </label>
+  <input placeholder="Search"
+         name="search"
+         type="text"
+         maxlength="30"
+         (keypress)="search(form)"
+         [(ngModel)]="inputValue"
+         [matAutocomplete]="auto">
   <mat-autocomplete #auto="matAutocomplete">
     <mat-option *ngFor="let city of showedCities" [value]="city">
       {{city}}

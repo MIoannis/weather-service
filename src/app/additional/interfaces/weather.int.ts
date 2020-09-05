@@ -30,4 +30,7 @@ export interface Weather {
     sunset: number
   };
   name: string;
+  "clouds": {
+    "all": number
+  },
 }

@@ -1,34 +1,75 @@
 <div class="main">
   <app-settings @insertSideSettings *ngIf="setVar"></app-settings>
-  <div class="forecast-container">
-    <button mat-flat-button class="forecast" id="now">Now</button>
-    <button mat-flat-button class="forecast" id="hour">3H</button>
-    <button mat-flat-button class="forecast" id="day">1D</button>
-  </div>
   <app-search
     [@moveInputUp]="(this.sessionQuery.weatherData$ | async) ? 'up' : 'center'"
-    (showErrorEvent)="showError(true)"></app-search>
+    (showErrorEvent)="showError($event)"></app-search>
   <div [@showTemp]="tempAnimation ? 'zero' : 'full'">
     <ng-template [ngIf]="(this.sessionQuery.weatherData$ | async) !== null" [ngIfElse]="noData" >
-      <div class="wind">
-        Wind speed: {{(this.sessionQuery.weatherData$ | async)?.wind.speed}} {{speedSystem}}
-        <app-canvas [speedData]="(this.sessionQuery.weatherData$ | async)?.wind.speed / 100"></app-canvas>
+      <div class="translate-container">
+        <button mat-flat-button
+                id="first"
+                class="translate-buttons"
+                (click)="changeTranslateValuePositive()"
+                *ngIf="negativeButton"><</button>
+        <button mat-flat-button
+                id="second"
+                class="translate-buttons"
+                (click)="changeTranslateValueNegative()"
+                *ngIf="positiveButton">></button>
       </div>
-      <div class="main-temp">
-        {{(this.sessionQuery.weatherData$ | async)?.main.temp | round}}&deg;{{degreeLetter}}
+      <div class="forecast">
+        <div *ngFor="let item of (this.sessionQuery.forecastData$ | async)?.list"
+             [ngStyle]="{'transform': 'translateX(' + translateXValue + 'vw)', 'transition-duration': '500ms'}"
+             class="container">
+          <img src="http://openweathermap.org/img/wn/{{item.weather[0].icon}}@2x.png"
+               alt="weather icon"
+          title="{{(this.sessionQuery.weatherData$ | async)?.weather[0].main}}">
+          <div>
+            <p>{{item.weather[0].description}}</p>
+          </div>
+          <div>
+            <p>{{item.dt_txt.slice(10, -3)}}</p>
+          </div>
+          <div>
+            <p>{{item.main.temp | number:'1.0-0'}}&deg;{{degreeLetter}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="wrapper">
+        <div class="wind">
+          <app-canvas [speedData]="(this.sessionQuery.weatherData$ | async)?.wind.speed / 100"></app-canvas>
+          <p>{{(this.sessionQuery.weatherData$ | async)?.wind.speed}} {{speedSystem}}</p>
+          <p id="description">{{(this.sessionQuery.weatherData$ | async)?.weather[0].description}}</p>
+        </div>
+        <div class="sun">
+          <p>sunrise {{(this.sessionQuery.weatherData$ | async)?.sys.sunrise | sunDate}} ...
+            {{(this.sessionQuery.weatherData$ | async)?.sys.sunset | sunDate}} sunset</p>
+        </div>
+        <div class="time">
+          <p>forecast time: {{(this.sessionQuery.forecastTime$ | async) | date:'H:mm'}}</p>
+        </div>
+        <div class="main-temp">
+          {{(this.sessionQuery.weatherData$ | async)?.main.temp | number:'1.0-0'}}&deg;{{degreeLetter}}
+          <div>
+            <img src="http://openweathermap.org/img/wn/{{(this.sessionQuery.weatherData$ | async)?.weather[0].icon}}@2x.png"
+                 alt="weather icon"
+                 title="{{(this.sessionQuery.weatherData$ | async)?.weather[0].main}}">
+          </div>
+        </div>
       </div>
       <div class="temp-info" @insertTempData *ngIf="tempDataAnimation">
         <div>
-          <p>Feels like: {{(this.sessionQuery.weatherData$ | async)?.main.feels_like | round}}&deg;{{degreeLetter}}</p>
+          <p>Feels like: {{(this.sessionQuery.weatherData$ | async)?.main.feels_like | number:'1.0-0'}}
+            &deg;{{degreeLetter}}</p>
         </div>
         <div>
           <p>Cloudiness: {{(this.sessionQuery.weatherData$ | async)?.clouds.all}}%</p>
         </div>
         <div>
-          <p>Humidity: {{(this.sessionQuery.weatherData$ | async)?.main.humidity | round}}%</p>
+          <p>Humidity: {{(this.sessionQuery.weatherData$ | async)?.main.humidity | number:'1.0-0'}}%</p>
         </div>
         <div>
-          <p>Pressure: {{(this.sessionQuery.weatherData$ | async)?.main.pressure | round}} hPa</p>
+          <p>Pressure: {{(this.sessionQuery.weatherData$ | async)?.main.pressure | number:'1.0-0'}} hPa</p>
         </div>
       </div>
     </ng-template>
@@ -42,5 +83,11 @@
   <div class="copyright">&copy; Ioannis Mikhailidis</div>
 </div>
 <ng-template #noData>
-  <p class="noData" *ngIf="checkData">No data to show!<br>You might have not chosen city or made a mistake!</p>
+  <div class="no-data">
+    <p>Loading...</p>
+    <div class="lds-roller">
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+  </div>
+  <div class="data-error" *ngIf="checkData"><p>If it takes for too long, you might have not chosen city or made a mistake!</p></div>
 </ng-template>

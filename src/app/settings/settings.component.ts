@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../store/session.service';
 import { SessionQuery } from '../store/session.query';
 
-import {Weather} from "../additional/weather.int";
+import {Weather} from "../additional/interfaces/weather.int";
 
 @Component({
   selector: 'app-settings',
@@ -27,16 +27,19 @@ export class SettingsComponent implements OnInit {
     if (event.value === 'Celsius') {
       this.sessionService.updateSystem('metric', 'C', 'm/s');
       this.sessionService.updateCurrentData(this.data.name, 'metric');
+      this.sessionService.updateDailyData(this.data.name, 'metric');
     }
 
     if (event.value === 'Fahrenheit') {
       this.sessionService.updateSystem('imperial', 'F', 'm/h');
       this.sessionService.updateCurrentData(this.data.name, 'imperial');
+      this.sessionService.updateDailyData(this.data.name, 'imperial')
     }
 
     if (event.value === 'Kelvin') {
       this.sessionService.updateSystem('', 'K', 'm/s');
       this.sessionService.updateCurrentData(this.data.name, '');
+      this.sessionService.updateDailyData(this.data.name, '')
     }
     this.sessionService.updateIndex(i);
   }

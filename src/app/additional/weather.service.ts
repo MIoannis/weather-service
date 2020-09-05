@@ -4,8 +4,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Weather } from './weather.int';
-import { CityList } from './сity.int';
+import { Weather } from './interfaces/weather.int';
+import { CityList } from './interfaces/сity.int';
+import {Forecast} from "./interfaces/forecast.int";
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +27,14 @@ export class WeatherService {
     return throwError(error);
   }
 
-  getData(url) {
+  getCurrentData(url) {
     return this.http.get<Weather>(url)
       .pipe(catchError(WeatherService.handleError));
+  }
+
+  getForecast(url) {
+    return this.http.get<Forecast>(url)
+      .pipe(catchError(WeatherService.handleError))
   }
 
   getTowns() {

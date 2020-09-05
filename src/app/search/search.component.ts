@@ -11,7 +11,7 @@ import { SessionQuery } from "../store/session.query";
 
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-import { CityList } from "../additional/сity.int";
+import { CityList } from "../additional/interfaces/сity.int";
 
 
 @Component({
@@ -24,7 +24,8 @@ import { CityList } from "../additional/сity.int";
         height: '90%',
       })),
       state('up', style({
-        height: '50%',
+        height: '35%',
+        width: '150%'
       })),
       transition('center => up', [
         animate('1s ease-in-out')
@@ -69,12 +70,15 @@ export class SearchComponent implements OnInit {
   }
 
   submitCity(form: NgForm) {
-    this._update(form.value.search, this.currentSystem);
+    let time = Date.now();
+    this._update(form.value.search, this.currentSystem, time);
   }
 
-  _update(searchValue: string, currentSystem: string) {
+  _update(searchValue: string, currentSystem: string, time) {
     this.sessionService.updateCurrentData(searchValue, currentSystem);
+    this.sessionService.updateDailyData(searchValue, currentSystem);
     this.sessionService.updateAnimationVars(false, true);
+    this.sessionService.updateTime(time)
   }
 
   search(form: NgForm) {

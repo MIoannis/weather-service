@@ -35,11 +35,23 @@ form {
     border: 0;
     padding: 0;
     height: 4.4vh;
-    font-size: 1em;
+    font-size: 2.5vmin;
     transition: background 300ms linear;
+    text-indent: 10px;
+    max-width: 400px;
+    min-width: 100px;
+
+    &::placeholder {
+      transition: text-indent 0.6s ease;
+      text-indent: 10px;
+    }
 
     &:hover, &:focus {
       background: $input-background;
+    }
+
+    &:focus::placeholder {
+      text-indent: 500px;
     }
   }
 }
