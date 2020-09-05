@@ -25,7 +25,7 @@ import { CityList } from "../additional/interfaces/сity.int";
       })),
       state('up', style({
         height: '35%',
-        width: '150%'
+        width: '145%'
       })),
       transition('center => up', [
         animate('1s ease-in-out')
