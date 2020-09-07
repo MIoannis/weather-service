@@ -23,7 +23,7 @@
              class="container">
           <img src="http://openweathermap.org/img/wn/{{item.weather[0].icon}}@2x.png"
                alt="weather icon"
-          title="{{(this.sessionQuery.weatherData$ | async)?.weather[0].main}}">
+               title="{{item.weather[0].main}}">
           <div>
             <p>{{item.weather[0].description}}</p>
           </div>

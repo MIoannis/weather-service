@@ -69,7 +69,7 @@ export class MainpageComponent implements OnInit {
   }
 
   changeTranslateValuePositive() {
-    this.translateXValue += 32;
+    this.translateXValue += 30;
     if (this.translateXValue === 0) {
       this.positiveButton = true;
       this.negativeButton = false;
@@ -82,13 +82,13 @@ export class MainpageComponent implements OnInit {
   }
 
   changeTranslateValueNegative() {
-    this.translateXValue -= 32;
-    if (this.translateXValue === -384) {
+    this.translateXValue -= 30;
+    if (this.translateXValue === -360) {
       this.positiveButton = false;
       this.negativeButton = true;
     }
 
-    if (this.translateXValue > -384) {
+    if (this.translateXValue > -360) {
       this.positiveButton = true;
       this.negativeButton = true;
     }
